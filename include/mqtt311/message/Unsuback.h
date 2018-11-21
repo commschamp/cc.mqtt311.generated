@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"UNSUBACK"<\b> message and its fields.
+/// @brief Contains definition of <b>"UNSUBACK"</b> message and its fields.
 
 #pragma once
 
@@ -24,11 +24,10 @@ namespace message
 template <typename TOpt = mqtt311::DefaultOptions>
 struct UnsubackFields
 {
-    /// @brief Definition of <b>"Packet ID"<\b> field.
+    /// @brief Definition of <b>"Packet ID"</b> field.
     using PacketId =
         mqtt311::field::PacketId<
-           TOpt,
-           typename TOpt::message::UnsubackFields::PacketId
+           TOpt
        >;
     
     /// @brief All the fields bundled in std::tuple.
@@ -37,7 +36,7 @@ struct UnsubackFields
     >;
 };
 
-/// @brief Definition of <b>"UNSUBACK"<\b> message class.
+/// @brief Definition of <b>"UNSUBACK"</b> message class.
 /// @details
 ///     See @ref UnsubackFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.
@@ -87,12 +86,6 @@ public:
     static const char* doName()
     {
         return "UNSUBACK";
-    }
-    
-    /// @brief Updated validity check
-    bool doValid() const
-    {
-        return Base::doValid() && Base::flagsZeroed();
     }
     
     

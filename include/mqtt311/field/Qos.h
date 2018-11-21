@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"Qos"<\b> field.
+/// @brief Contains definition of <b>"Qos"</b> field.
 
 #pragma once
 
@@ -24,7 +24,7 @@ enum class QosVal : std::uint8_t
     
 };
 
-/// @brief Definition of <b>"Qos"<\b> field.
+/// @brief Definition of <b>"Qos"</b> field.
 /// @tparam TOpt Protocol options.
 /// @tparam TExtraOpts Extra options.
 template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>
@@ -32,7 +32,6 @@ struct Qos : public
     comms::field::EnumValue<
         mqtt311::field::FieldBase<>,
         QosVal,
-        typename TOpt::field::Qos,
         TExtraOpts...,
         comms::option::ValidNumValueRange<0, 2>
     >

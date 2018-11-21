@@ -1,0 +1,86 @@
+/// @file
+/// @brief Contains definition of protocol default options for server.
+
+#pragma once
+
+#include "DefaultOptions.h"
+
+namespace mqtt311
+{
+
+/// @brief Default options of the protocol specific for a server.
+struct ServerDefaultOptions
+{
+    /// @brief Extra options for messages.
+    struct message : public DefaultOptions::message
+    {
+        /// @brief Extra options for @ref mqtt311::message::Connack message.
+        using Connack =
+            std::tuple<
+                comms::option::NoReadImpl,
+                comms::option::NoDispatchImpl
+            >;
+        
+        /// @brief Extra options for @ref mqtt311::message::Connect message.
+        using Connect =
+            std::tuple<
+                comms::option::NoWriteImpl,
+                comms::option::NoRefreshImpl
+            >;
+        
+        /// @brief Extra options for @ref mqtt311::message::Disconnect message.
+        using Disconnect =
+            std::tuple<
+                comms::option::NoWriteImpl,
+                comms::option::NoRefreshImpl
+            >;
+        
+        /// @brief Extra options for @ref mqtt311::message::Pingreq message.
+        using Pingreq =
+            std::tuple<
+                comms::option::NoWriteImpl,
+                comms::option::NoRefreshImpl
+            >;
+        
+        /// @brief Extra options for @ref mqtt311::message::Pingresp message.
+        using Pingresp =
+            std::tuple<
+                comms::option::NoReadImpl,
+                comms::option::NoDispatchImpl
+            >;
+        
+        /// @brief Extra options for @ref mqtt311::message::Suback message.
+        using Suback =
+            std::tuple<
+                comms::option::NoReadImpl,
+                comms::option::NoDispatchImpl
+            >;
+        
+        /// @brief Extra options for @ref mqtt311::message::Subscribe message.
+        using Subscribe =
+            std::tuple<
+                comms::option::NoWriteImpl,
+                comms::option::NoRefreshImpl
+            >;
+        
+        /// @brief Extra options for @ref mqtt311::message::Unsuback message.
+        using Unsuback =
+            std::tuple<
+                comms::option::NoReadImpl,
+                comms::option::NoDispatchImpl
+            >;
+        
+        /// @brief Extra options for @ref mqtt311::message::Unsubscribe message.
+        using Unsubscribe =
+            std::tuple<
+                comms::option::NoWriteImpl,
+                comms::option::NoRefreshImpl
+            >;
+        
+    };
+    
+};
+
+} // namespace mqtt311
+
+

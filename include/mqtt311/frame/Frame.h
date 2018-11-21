@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"Frame"<\b> frame class.
+/// @brief Contains definition of <b>"Frame"</b> frame class.
 
 #pragma once
 
@@ -37,12 +37,11 @@ struct FrameLayers
     /// @brief Scope for field(s) of @ref Size layer.
     struct SizeMembers
     {
-        /// @brief Definition of <b>"Size"<\b> field.
+        /// @brief Definition of <b>"Size"</b> field.
         struct Size : public
             comms::field::IntValue<
                 mqtt311::field::FieldBase<comms::option::LittleEndian>,
                 std::uint32_t,
-                typename TOpt::frame::FrameLayers::SizeMembers::Size,
                 comms::option::VarLength<1U, 4U>
             >
         {
@@ -69,36 +68,34 @@ struct FrameLayers
         /// @brief Scope for all the member fields of @ref IdAndFlagsField bitfield.
         struct IdAndFlagsFieldMembers
         {
-            /// @brief Definition of <b>"flags"<\b> field.
+            /// @brief Definition of <b>"Flags"</b> field.
             struct Flags : public
                 comms::field::IntValue<
                     mqtt311::field::FieldBase<>,
                     std::uint8_t,
-                    typename TOpt::frame::FrameLayers::IdAndFlagsMembers::IdAndFlagsFieldMembers::Flags,
                     comms::option::FixedBitLength<4U>
                 >
             {
                 /// @brief Name of the field.
                 static const char* name()
                 {
-                    return "flags";
+                    return "Flags";
                 }
                 
             };
             
-            /// @brief Definition of <b>"id"<\b> field.
+            /// @brief Definition of <b>"Id"</b> field.
             struct Id : public
                 comms::field::IntValue<
                     mqtt311::field::FieldBase<>,
                     std::uint8_t,
-                    typename TOpt::frame::FrameLayers::IdAndFlagsMembers::IdAndFlagsFieldMembers::Id,
                     comms::option::FixedBitLength<4U>
                 >
             {
                 /// @brief Name of the field.
                 static const char* name()
                 {
-                    return "id";
+                    return "Id";
                 }
                 
             };
@@ -111,19 +108,17 @@ struct FrameLayers
                 >;
         };
         
-        /// @brief Definition of <b>"ID + Flags"<\b> field.
+        /// @brief Definition of <b>"ID + Flags"</b> field.
         class IdAndFlagsField : public
             comms::field::Bitfield<
                 mqtt311::field::FieldBase<>,
-                typename IdAndFlagsFieldMembers::All,
-                typename TOpt::frame::FrameLayers::IdAndFlagsMembers::IdAndFlagsField
+                typename IdAndFlagsFieldMembers::All
             >
         {
             using Base = 
                 comms::field::Bitfield<
                     mqtt311::field::FieldBase<>,
-                    typename IdAndFlagsFieldMembers::All,
-                    typename TOpt::frame::FrameLayers::IdAndFlagsMembers::IdAndFlagsField
+                    typename IdAndFlagsFieldMembers::All
                 >;
         public:
             /// @brief Allow access to internal fields.
@@ -132,8 +127,8 @@ struct FrameLayers
             ///     for details.
             ///
             ///      The generated access functions are:
-            ///     @li @b field_flags() - for @ref IdAndFlagsFieldMembers::flags member field.
-            ///     @li @b field_id() - for @ref IdAndFlagsFieldMembers::id member field.
+            ///     @li @b field_flags() - for IdAndFlagsFieldMembers::Flags member field.
+            ///     @li @b field_id() - for IdAndFlagsFieldMembers::Id member field.
             COMMS_FIELD_MEMBERS_ACCESS(
                 flags,
                 id
@@ -166,7 +161,9 @@ struct FrameLayers
     
 };
 
-/// @brief Definition of <b>"Frame"<\b> frame class.
+/// @brief Definition of <b>"Frame"</b> frame class.
+/// @tparam TMessage Common interface class of all the messages
+/// @tparam TAllMessages All supported input messages.
 /// @tparam TOpt Frame definition options
 /// @headerfile "mqtt311/frame/Frame.h"
 template <

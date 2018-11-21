@@ -15,7 +15,7 @@ class Message : public
     >
 {
 protected:
-    const QVariantList& extraTransportFieldsPropertiesImpl() const override;
+    virtual const QVariantList& extraTransportFieldsPropertiesImpl() const override;
 };
 
 } // namespace cc_plugin

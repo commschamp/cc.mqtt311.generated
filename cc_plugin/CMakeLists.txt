@@ -11,6 +11,7 @@ function (cc_plugin_all_messages)
         field/ProtocolName.cpp
         field/Qos.cpp
         field/String.cpp
+        field/Topic.cpp
         Message.cpp
         message/Connack.cpp
         message/Connect.cpp
@@ -32,6 +33,9 @@ function (cc_plugin_all_messages)
     add_library (${name} STATIC ${src})
     target_link_libraries (${name} ${CC_PLUGIN_LIBRARIES})
     qt5_use_modules(${name} Core)
+    if (OPT_FULL_SOLUTION)
+        add_dependencies(${name} ${CC_EXTERNAL_TGT})
+    endif ()
 endfunction()
 
 ######################################################################
@@ -44,7 +48,7 @@ function (cc_plugin protocol)
 
     if ((NOT EXISTS ${stamp_file}) OR (${meta_file} IS_NEWER_THAN ${stamp_file}))
         execute_process(
-            COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_SOURCE_DIR}/${protocol}Plugin.h)
+            COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_SOURCE_DIR}/plugin/${protocol}Plugin.h)
 
         execute_process(
             COMMAND ${CMAKE_COMMAND} -E touch ${stamp_file})
@@ -61,16 +65,26 @@ function (cc_plugin protocol)
 
     qt5_wrap_cpp(moc ${hdr})
 
-    add_library (${name} SHARED ${src} ${moc})
-    target_link_libraries (${name} ${ALL_MESSAGES_LIB} ${CC_PLUGIN_LIBRARIES})
+    set(extra_link_opts)
+    if (CMAKE_COMPILER_IS_GNUCC)
+        set(extra_link_opts "-Wl,--no-undefined")
+    endif ()
+
+    add_library (${name} MODULE ${src} ${moc})
+    target_link_libraries (${name} ${ALL_MESSAGES_LIB} ${CC_PLUGIN_LIBRARIES} ${extra_link_opts})
+    if (CMAKE_COMPILER_IS_GNUCC)
+        target_compile_options(${name} PRIVATE "-ftemplate-backtrace-limit=0")
+    endif ()
+
     qt5_use_modules (${name} Core)
     install (
         TARGETS ${name}
         DESTINATION ${PLUGIN_INSTALL_DIR})
 
-    if (OPT_FULL_SOLUTION)
-        add_dependencies(${name} ${CC_EXTERNAL_TGT})
-    endif ()
+    install (
+        FILES plugin/${protocol}.cfg
+        DESTINATION ${CONFIG_INSTALL_DIR})
+
 endfunction()
 
 ######################################################################
@@ -88,6 +102,11 @@ cc_plugin_all_messages()
 
 cc_plugin ("Mqtt311")
 
-file (GLOB_RECURSE plugin.headers "*.h")
-add_custom_target(cc_plugin.headers SOURCES ${plugin.headers})
+if (OPT_FULL_SOLUTION)
+    install (
+        FILES plugin/Mqtt311.cfg
+        DESTINATION ${CONFIG_INSTALL_DIR}
+        RENAME "default.cfg")
+endif()
+
 

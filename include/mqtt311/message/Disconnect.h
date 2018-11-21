@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"DISCONNECT"<\b> message and its fields.
+/// @brief Contains definition of <b>"DISCONNECT"</b> message and its fields.
 
 #pragma once
 
@@ -26,7 +26,7 @@ struct DisconnectFields
     >;
 };
 
-/// @brief Definition of <b>"DISCONNECT"<\b> message class.
+/// @brief Definition of <b>"DISCONNECT"</b> message class.
 /// @details
 ///     See @ref DisconnectFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.

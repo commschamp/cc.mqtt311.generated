@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"PINGREQ"<\b> message and its fields.
+/// @brief Contains definition of <b>"PINGREQ"</b> message and its fields.
 
 #pragma once
 
@@ -26,7 +26,7 @@ struct PingreqFields
     >;
 };
 
-/// @brief Definition of <b>"PINGREQ"<\b> message class.
+/// @brief Definition of <b>"PINGREQ"</b> message class.
 /// @details
 ///     See @ref PingreqFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.
@@ -65,12 +65,6 @@ public:
     static const char* doName()
     {
         return "PINGREQ";
-    }
-    
-    /// @brief Updated validity check
-    bool doValid() const
-    {
-        return Base::doValid() && Base::flagsZeroed();
     }
     
     

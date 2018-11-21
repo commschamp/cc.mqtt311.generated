@@ -17,7 +17,7 @@ Mqtt311Plugin::Mqtt311Plugin()
 {
     pluginProperties()
         .setProtocolCreateFunc(
-            [this]() -> cc::ProtocolPtr
+            []() -> cc::ProtocolPtr
             {
                 return cc::ProtocolPtr(new Mqtt311Protocol());
             });

@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"PUBACK"<\b> message and its fields.
+/// @brief Contains definition of <b>"PUBACK"</b> message and its fields.
 
 #pragma once
 
@@ -24,11 +24,10 @@ namespace message
 template <typename TOpt = mqtt311::DefaultOptions>
 struct PubackFields
 {
-    /// @brief Definition of <b>"Packet ID"<\b> field.
+    /// @brief Definition of <b>"Packet ID"</b> field.
     using PacketId =
         mqtt311::field::PacketId<
-           TOpt,
-           typename TOpt::message::PubackFields::PacketId
+           TOpt
        >;
     
     /// @brief All the fields bundled in std::tuple.
@@ -37,7 +36,7 @@ struct PubackFields
     >;
 };
 
-/// @brief Definition of <b>"PUBACK"<\b> message class.
+/// @brief Definition of <b>"PUBACK"</b> message class.
 /// @details
 ///     See @ref PubackFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.
@@ -47,7 +46,6 @@ template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
 class Puback : public
     comms::MessageBase<
         TMsgBase,
-        typename TOpt::message::Puback,
         comms::option::StaticNumIdImpl<mqtt311::MsgId_Puback>,
         comms::option::FieldsImpl<typename PubackFields<TOpt>::All>,
         comms::option::MsgType<Puback<TMsgBase, TOpt> >,
@@ -58,7 +56,6 @@ class Puback : public
     using Base =
         comms::MessageBase<
             TMsgBase,
-            typename TOpt::message::Puback,
             comms::option::StaticNumIdImpl<mqtt311::MsgId_Puback>,
             comms::option::FieldsImpl<typename PubackFields<TOpt>::All>,
             comms::option::MsgType<Puback<TMsgBase, TOpt> >,
@@ -87,12 +84,6 @@ public:
     static const char* doName()
     {
         return "PUBACK";
-    }
-    
-    /// @brief Updated validity check
-    bool doValid() const
-    {
-        return Base::doValid() && Base::flagsZeroed();
     }
     
     

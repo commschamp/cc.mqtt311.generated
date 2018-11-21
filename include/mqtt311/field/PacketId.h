@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"Packet ID"<\b> field.
+/// @brief Contains definition of <b>"Packet ID"</b> field.
 
 #pragma once
 
@@ -15,7 +15,7 @@ namespace mqtt311
 namespace field
 {
 
-/// @brief Definition of <b>"Packet ID"<\b> field.
+/// @brief Definition of <b>"Packet ID"</b> field.
 /// @tparam TOpt Protocol options.
 /// @tparam TExtraOpts Extra options.
 template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>
@@ -23,7 +23,6 @@ struct PacketId : public
     comms::field::IntValue<
         mqtt311::field::FieldBase<>,
         std::uint16_t,
-        typename TOpt::field::PacketId,
         TExtraOpts...
     >
 {

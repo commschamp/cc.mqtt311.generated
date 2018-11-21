@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"Protocol Name"<\b> field.
+/// @brief Contains definition of <b>"Protocol Name"</b> field.
 
 #pragma once
 
@@ -15,7 +15,7 @@ namespace mqtt311
 namespace field
 {
 
-/// @brief Definition of <b>"Protocol Name"<\b> field.
+/// @brief Definition of <b>"Protocol Name"</b> field.
 /// @tparam TOpt Protocol options.
 /// @tparam TExtraOpts Extra options.
 template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>
@@ -47,12 +47,6 @@ public:
     static const char* name()
     {
         return "Protocol Name";
-    }
-    
-    /// @brief Custom validity check
-    bool valid() const
-    {
-        return Base::value() == ProtocolName().value();
     }
     
 };

@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"Message"<\b> interface class.
+/// @brief Contains definition of <b>"Message"</b> interface class.
 
 #pragma once
 
@@ -24,7 +24,7 @@ struct MessageFields
     /// @brief Scope for all the member fields of @ref Flags bitfield.
     struct FlagsMembers
     {
-        /// @brief Definition of <b>""<\b> field.
+        /// @brief Definition of <b>""</b> field.
         class Retain : public
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
@@ -43,7 +43,7 @@ struct MessageFields
             ///     for details.
             ///
             ///      The generated enum values and functions are:
-            ///      @li @b FieldIdx_bit, @b getBitValue_bit() and @b setBitValue_bit().
+            ///      @li @b BitIdx_bit, @b getBitValue_bit() and @b setBitValue_bit().
             COMMS_BITMASK_BITS_SEQ(
                 bit
             );
@@ -65,7 +65,7 @@ struct MessageFields
             
         };
         
-        /// @brief Definition of <b>"Qos"<\b> field.
+        /// @brief Definition of <b>"Qos"</b> field.
         struct Qos : public
             comms::field::EnumValue<
                 mqtt311::field::FieldBase<>,
@@ -82,19 +82,19 @@ struct MessageFields
             
         };
         
-        /// @brief Definition of <b>""<\b> field.
+        /// @brief Definition of <b>""</b> field.
         class Dup : public
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
                 comms::option::FixedBitLength<5U>,
-                comms::option::BitmaskReservedBits<0x1eU, 0x0U>
+                comms::option::BitmaskReservedBits<0x1EU, 0x0U>
             >
         {
             using Base = 
                 comms::field::BitmaskValue<
                     mqtt311::field::FieldBase<>,
                     comms::option::FixedBitLength<5U>,
-                    comms::option::BitmaskReservedBits<0x1eU, 0x0U>
+                    comms::option::BitmaskReservedBits<0x1EU, 0x0U>
                 >;
         public:
             /// @brief Provides names and generates access functions for internal bits.
@@ -103,7 +103,7 @@ struct MessageFields
             ///     for details.
             ///
             ///      The generated enum values and functions are:
-            ///      @li @b FieldIdx_bit, @b getBitValue_bit() and @b setBitValue_bit().
+            ///      @li @b BitIdx_bit, @b getBitValue_bit() and @b setBitValue_bit().
             COMMS_BITMASK_BITS_SEQ(
                 bit
             );
@@ -125,7 +125,7 @@ struct MessageFields
             >;
     };
     
-    /// @brief Definition of <b>"flags"<\b> field.
+    /// @brief Definition of <b>"Flags"</b> field.
     class Flags : public
         comms::field::Bitfield<
             mqtt311::field::FieldBase<>,
@@ -144,9 +144,9 @@ struct MessageFields
         ///     for details.
         ///
         ///      The generated access functions are:
-        ///     @li @b field_retain() - for @ref FlagsMembers::retain member field.
-        ///     @li @b field_qos() - for @ref FlagsMembers::qos member field.
-        ///     @li @b field_dup() - for @ref FlagsMembers::dup member field.
+        ///     @li @b field_retain() - for FlagsMembers::Retain member field.
+        ///     @li @b field_qos() - for FlagsMembers::Qos member field.
+        ///     @li @b field_dup() - for FlagsMembers::Dup member field.
         COMMS_FIELD_MEMBERS_ACCESS(
             retain,
             qos,
@@ -156,7 +156,7 @@ struct MessageFields
         /// @brief Name of the field.
         static const char* name()
         {
-            return "flags";
+            return "Flags";
         }
         
     };
@@ -167,7 +167,7 @@ struct MessageFields
     >;
 };
 
-/// @brief Definition of <b>"Message"<\b> common interface class.
+/// @brief Definition of <b>"Message"</b> common interface class.
 /// @tparam TOpt Interface definition options
 /// @headerfile "mqtt311/Message.h"
 template <typename... TOpt>
@@ -197,17 +197,6 @@ public:
     COMMS_MSG_TRANSPORT_FIELDS_ACCESS(
         flags
     );
-
-protected:
-    /// @brief Check that flags are zeroed
-    bool flagsZeroed() const
-    {
-        return 
-            (transportField_flags().field_retain().value() == 0U) &&
-            (static_cast<unsigned>(transportField_flags().field_qos().value()) == 0U) &&
-            (transportField_flags().field_dup().value() == 0U);
-    }
-    
 };
 
 } // namespace mqtt311

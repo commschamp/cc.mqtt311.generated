@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"SUBACK"<\b> message and its fields.
+/// @brief Contains definition of <b>"SUBACK"</b> message and its fields.
 
 #pragma once
 
@@ -27,11 +27,10 @@ namespace message
 template <typename TOpt = mqtt311::DefaultOptions>
 struct SubackFields
 {
-    /// @brief Definition of <b>"Packet ID"<\b> field.
+    /// @brief Definition of <b>"Packet ID"</b> field.
     using PacketId =
         mqtt311::field::PacketId<
-           TOpt,
-           typename TOpt::message::SubackFields::PacketId
+           TOpt
        >;
     
     /// @brief Scope for all the member fields of @ref List list.
@@ -47,12 +46,11 @@ struct SubackFields
             
         };
         
-        /// @brief Definition of <b>"Return Code"<\b> field.
+        /// @brief Definition of <b>"Return Code"</b> field.
         struct ReturnCode : public
             comms::field::EnumValue<
                 mqtt311::field::FieldBase<>,
                 ReturnCodeVal,
-                typename TOpt::message::SubackFields::ListMembers::ReturnCode,
                 comms::option::ValidNumValueRange<0, 2>,
                 comms::option::ValidNumValue<128>
             >
@@ -67,7 +65,7 @@ struct SubackFields
         
     };
     
-    /// @brief Definition of <b>"List"<\b> field.
+    /// @brief Definition of <b>"List"</b> field.
     struct List : public
         comms::field::ArrayList<
             mqtt311::field::FieldBase<>,
@@ -90,7 +88,7 @@ struct SubackFields
     >;
 };
 
-/// @brief Definition of <b>"SUBACK"<\b> message class.
+/// @brief Definition of <b>"SUBACK"</b> message class.
 /// @details
 ///     See @ref SubackFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.
@@ -140,16 +138,6 @@ public:
     static const char* doName()
     {
         return "SUBACK";
-    }
-    
-    /// @brief Updated validity check
-    bool doValid() const
-    {
-        if ((!Base::doValid()) || (!Base::flagsZeroed())) {
-            return false;
-        }
-        
-        return !field_list().value().empty();
     }
     
     

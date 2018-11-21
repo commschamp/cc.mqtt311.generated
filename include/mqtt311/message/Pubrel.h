@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"PUBREL"<\b> message and its fields.
+/// @brief Contains definition of <b>"PUBREL"</b> message and its fields.
 
 #pragma once
 
@@ -24,11 +24,10 @@ namespace message
 template <typename TOpt = mqtt311::DefaultOptions>
 struct PubrelFields
 {
-    /// @brief Definition of <b>"Packet ID"<\b> field.
+    /// @brief Definition of <b>"Packet ID"</b> field.
     using PacketId =
         mqtt311::field::PacketId<
-           TOpt,
-           typename TOpt::message::PubrelFields::PacketId
+           TOpt
        >;
     
     /// @brief All the fields bundled in std::tuple.
@@ -37,7 +36,7 @@ struct PubrelFields
     >;
 };
 
-/// @brief Definition of <b>"PUBREL"<\b> message class.
+/// @brief Definition of <b>"PUBREL"</b> message class.
 /// @details
 ///     See @ref PubrelFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.
@@ -47,7 +46,6 @@ template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
 class Pubrel : public
     comms::MessageBase<
         TMsgBase,
-        typename TOpt::message::Pubrel,
         comms::option::StaticNumIdImpl<mqtt311::MsgId_Pubrel>,
         comms::option::FieldsImpl<typename PubrelFields<TOpt>::All>,
         comms::option::MsgType<Pubrel<TMsgBase, TOpt> >,
@@ -58,7 +56,6 @@ class Pubrel : public
     using Base =
         comms::MessageBase<
             TMsgBase,
-            typename TOpt::message::Pubrel,
             comms::option::StaticNumIdImpl<mqtt311::MsgId_Pubrel>,
             comms::option::FieldsImpl<typename PubrelFields<TOpt>::All>,
             comms::option::MsgType<Pubrel<TMsgBase, TOpt> >,
@@ -87,12 +84,6 @@ public:
     static const char* doName()
     {
         return "PUBREL";
-    }
-    
-    /// @brief Updated validity check
-    bool doValid() const
-    {
-        return Base::doValid() && Base::flagsZeroed();
     }
     
     

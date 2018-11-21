@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"BinData"<\b> field.
+/// @brief Contains definition of <b>"BinData"</b> field.
 
 #pragma once
 
@@ -16,7 +16,7 @@ namespace mqtt311
 namespace field
 {
 
-/// @brief Definition of <b>"BinData"<\b> field.
+/// @brief Definition of <b>"BinData"</b> field.
 /// @tparam TOpt Protocol options.
 /// @tparam TExtraOpts Extra options.
 template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>

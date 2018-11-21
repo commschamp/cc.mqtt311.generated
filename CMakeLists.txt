@@ -11,7 +11,6 @@ option (OPT_NO_CCACHE "Disable use of ccache on UNIX system" OFF)
 # OPT_INSTALL_DIR - Custom install directory.
 # OPT_QT_DIR - Path to custom Qt5 install directory.
 # OPT_CC_MAIN_INSTALL_DIR - Path to CommsChampion install directory (if such already built).
-# OPT_DOXYGEN_CONFIG_FILE - Path to custom doxygen configuration file.
 
 if (NOT CMAKE_CXX_STANDARD)
     set (CMAKE_CXX_STANDARD 11)
@@ -28,41 +27,31 @@ set (BIN_INSTALL_DIR ${INSTALL_DIR}/${CMAKE_INSTALL_BINDIR})
 set (INC_INSTALL_DIR ${INSTALL_DIR}/${CMAKE_INSTALL_INCLUDEDIR})
 set (CONFIG_INSTALL_DIR ${INSTALL_DIR}/config)
 set (PLUGIN_INSTALL_DIR ${INSTALL_DIR}/${CMAKE_INSTALL_LIBDIR}/CommsChampion/plugin)
-set (DOC_INSTALL_DIR ${INSTALL_DIR}/doc)
+set (DOC_INSTALL_DIR ${INSTALL_DIR}/${CMAKE_INSTALL_DOCDIR})
 
 install (
     DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/mqtt311
     DESTINATION ${INC_INSTALL_DIR}
 )
 
-file (GLOB_RECURSE protocol.headers "include/*.h")
-add_custom_target(mqtt311.headers SOURCES ${protocol.headers})
+find_package (Doxygen)
+if (DOXYGEN_FOUND)
+    set (doc_output_dir "${DOC_INSTALL_DIR}")
+    make_directory (${doc_output_dir})
 
-#find_package (Doxygen)
-#if (DOXYGEN_FOUND)
-#    set (doc_output_dir "${DOC_INSTALL_DIR}/mqtt311")
-#    make_directory (${doc_output_dir})
+    set (match_str "OUTPUT_DIRECTORY[^\n]*")
+    set (replacement_str "OUTPUT_DIRECTORY = ${doc_output_dir}")
+    set (config_file "${CMAKE_CURRENT_SOURCE_DIR}/doc/doxygen.conf")
+    set (OPT_DOXYGEN_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/doxygen.conf")
 
-#    if ("${OPT_DOXYGEN_CONFIG_FILE}" STREQUAL "")
-#        set (match_str "OUTPUT_DIRECTORY[^\n]*")
-#        set (replacement_str "OUTPUT_DIRECTORY = ${doc_output_dir}")
-#        set (config_file "${CMAKE_CURRENT_SOURCE_DIR}/doc/doxygen.conf")
-#        set (OPT_DOXYGEN_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/doxygen.conf")
-
-#        file (READ ${config_file} config_text)
-#        string (REGEX REPLACE "${match_str}" "${replacement_str}" modified_config_text "${config_text}")
-#        file (WRITE "${OPT_DOXYGEN_CONFIG_FILE}" "${modified_config_text}")
-#    endif ()
-
-#    if (NOT EXISTS ${OPT_DOXYGEN_CONFIG_FILE})
-#        message(FATAL_ERROR "Doxygen configuration file ${OPT_DOXYGEN_CONFIG_FILE} does not exist")
-#    endif ()
-
-#    set (doc_tgt "doc_mqtt311")
-#    add_custom_target ("${doc_tgt}"
-#        COMMAND ${DOXYGEN_EXECUTABLE} ${OPT_DOXYGEN_CONFIG_FILE}
-#        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-#endif ()
+    file (READ ${config_file} config_text)
+    string (REGEX REPLACE "${match_str}" "${replacement_str}" modified_config_text "${config_text}")
+    file (WRITE "${OPT_DOXYGEN_CONFIG_FILE}" "${modified_config_text}")
+    set (doc_tgt "doc_mqtt311")
+    add_custom_target ("${doc_tgt}"
+        COMMAND ${DOXYGEN_EXECUTABLE} ${OPT_DOXYGEN_CONFIG_FILE}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+endif ()
 
 if (OPT_LIB_ONLY)
     return ()
@@ -73,7 +62,7 @@ endif ()
 set (CC_EXTERNAL_TGT "comms_champion_external")
 include(ExternalProject)
 macro (externals install_dir build_cc)
-    set (cc_tag "v0.25")
+    set (cc_tag "develop")
     set (cc_main_dir "${CMAKE_BINARY_DIR}/comms_champion")
     set (cc_src_dir "${cc_main_dir}/src")
     set (cc_bin_dir "${cc_main_dir}/build")
@@ -151,15 +140,10 @@ while (TRUE)
 
     if (CC_COMMS_CHAMPION_FOUND)
         link_directories(${CC_PLUGIN_LIBRARY_DIRS})
-        file (RELATIVE_PATH rel_plugin_install_path "${CC_ROOT_DIR}" "${CC_PLUGIN_DIR}")
-        set (PLUGIN_INSTALL_DIR "${INSTALL_DIR}/${rel_plugin_install_path}")
-    endif ()
-
-    if (EXISTS "${INSTALL_DIR}/cmake/CommsChampionConfig.cmake")
-        FILE(GLOB_RECURSE comms.headers "${INSTALL_DIR}/include/comms/*.h")
-        add_custom_target(comms.headers SOURCES ${comms.headers})
-        FILE(GLOB_RECURSE cc.headers "${INSTALL_DIR}/include/comms_champion/*.h")
-        add_custom_target(cc.headers SOURCES ${cc.headers})
+        if (CC_PLUGIN_DIR)
+            file (RELATIVE_PATH rel_plugin_install_path "${CC_ROOT_DIR}" "${CC_PLUGIN_DIR}")
+            set (PLUGIN_INSTALL_DIR "${INSTALL_DIR}/${rel_plugin_install_path}")
+        endif()
     endif ()
 
     break()
@@ -198,7 +182,7 @@ if ((CMAKE_COMPILER_IS_GNUCC) OR ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
     string(REPLACE ";" " " extra_flags "${extra_flags_list}")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${extra_flags}")
 elseif (MSVC)
-    add_definitions( "/wd4503" "/wd4309" "/wd4267" "-D_SCL_SECURE_NO_WARNINGS")
+    add_definitions( "/wd4503" "/wd4309" "/wd4267" "-D_SCL_SECURE_NO_WARNINGS" "/bigobj")
     if (NOT CC_NO_WARN_AS_ERR)
         add_definitions("/WX")
     endif ()

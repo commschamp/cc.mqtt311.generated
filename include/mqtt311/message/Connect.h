@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"CONNECT"<\b> message and its fields.
+/// @brief Contains definition of <b>"CONNECT"</b> message and its fields.
 
 #pragma once
 
@@ -32,19 +32,17 @@ namespace message
 template <typename TOpt = mqtt311::DefaultOptions>
 struct ConnectFields
 {
-    /// @brief Definition of <b>"Protocol Name"<\b> field.
+    /// @brief Definition of <b>"Protocol Name"</b> field.
     using ProtocolName =
         mqtt311::field::ProtocolName<
-           TOpt,
-           typename TOpt::message::ConnectFields::ProtocolName
+           TOpt
        >;
     
-    /// @brief Definition of <b>"Protocol Level"<\b> field.
+    /// @brief Definition of <b>"Protocol Level"</b> field.
     struct ProtocolLevel : public
         comms::field::IntValue<
             mqtt311::field::FieldBase<>,
             std::uint8_t,
-            typename TOpt::message::ConnectFields::ProtocolLevel,
             comms::option::DefaultNumValue<4>,
             comms::option::ValidNumValue<4>
         >
@@ -60,11 +58,10 @@ struct ConnectFields
     /// @brief Scope for all the member fields of @ref Flags bitfield.
     struct FlagsMembers
     {
-        /// @brief Definition of <b>""<\b> field.
+        /// @brief Definition of <b>""</b> field.
         class Low : public
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
-                typename TOpt::message::ConnectFields::FlagsMembers::Low,
                 comms::option::FixedBitLength<3U>,
                 comms::option::BitmaskReservedBits<0x1U, 0x0U>
             >
@@ -72,7 +69,6 @@ struct ConnectFields
             using Base = 
                 comms::field::BitmaskValue<
                     mqtt311::field::FieldBase<>,
-                    typename TOpt::message::ConnectFields::FlagsMembers::Low,
                     comms::option::FixedBitLength<3U>,
                     comms::option::BitmaskReservedBits<0x1U, 0x0U>
                 >;
@@ -120,12 +116,11 @@ struct ConnectFields
             
         };
         
-        /// @brief Definition of <b>"Will QoS"<\b> field.
+        /// @brief Definition of <b>"Will QoS"</b> field.
         struct WillQos : public
             comms::field::EnumValue<
                 mqtt311::field::FieldBase<>,
                 WillQosVal,
-                typename TOpt::message::ConnectFields::FlagsMembers::WillQos,
                 comms::option::FixedBitLength<2U>,
                 comms::option::ValidNumValueRange<0, 2>
             >
@@ -138,18 +133,16 @@ struct ConnectFields
             
         };
         
-        /// @brief Definition of <b>""<\b> field.
+        /// @brief Definition of <b>""</b> field.
         class High : public
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
-                typename TOpt::message::ConnectFields::FlagsMembers::High,
                 comms::option::FixedBitLength<3U>
             >
         {
             using Base = 
                 comms::field::BitmaskValue<
                     mqtt311::field::FieldBase<>,
-                    typename TOpt::message::ConnectFields::FlagsMembers::High,
                     comms::option::FixedBitLength<3U>
                 >;
         public:
@@ -159,9 +152,9 @@ struct ConnectFields
             ///     for details.
             ///
             ///      The generated enum values and functions are:
-            ///      @li @b FieldIdx_willRetain, @b getBitValue_willRetain() and @b setBitValue_willRetain().
-            ///      @li @b FieldIdx_passwordFlag, @b getBitValue_passwordFlag() and @b setBitValue_passwordFlag().
-            ///      @li @b FieldIdx_userNameFlag, @b getBitValue_userNameFlag() and @b setBitValue_userNameFlag().
+            ///      @li @b BitIdx_willRetain, @b getBitValue_willRetain() and @b setBitValue_willRetain().
+            ///      @li @b BitIdx_passwordFlag, @b getBitValue_passwordFlag() and @b setBitValue_passwordFlag().
+            ///      @li @b BitIdx_userNameFlag, @b getBitValue_userNameFlag() and @b setBitValue_userNameFlag().
             COMMS_BITMASK_BITS_SEQ(
                 willRetain,
                 passwordFlag,
@@ -185,19 +178,17 @@ struct ConnectFields
             >;
     };
     
-    /// @brief Definition of <b>"Connect Flags"<\b> field.
+    /// @brief Definition of <b>"Connect Flags"</b> field.
     class Flags : public
         comms::field::Bitfield<
             mqtt311::field::FieldBase<>,
-            typename FlagsMembers::All,
-            typename TOpt::message::ConnectFields::Flags
+            typename FlagsMembers::All
         >
     {
         using Base = 
             comms::field::Bitfield<
                 mqtt311::field::FieldBase<>,
-                typename FlagsMembers::All,
-                typename TOpt::message::ConnectFields::Flags
+                typename FlagsMembers::All
             >;
     public:
         /// @brief Allow access to internal fields.
@@ -206,9 +197,9 @@ struct ConnectFields
         ///     for details.
         ///
         ///      The generated access functions are:
-        ///     @li @b field_low() - for @ref FlagsMembers::low member field.
-        ///     @li @b field_willQos() - for @ref FlagsMembers::willQos member field.
-        ///     @li @b field_high() - for @ref FlagsMembers::high member field.
+        ///     @li @b field_low() - for FlagsMembers::Low member field.
+        ///     @li @b field_willQos() - for FlagsMembers::WillQos member field.
+        ///     @li @b field_high() - for FlagsMembers::High member field.
         COMMS_FIELD_MEMBERS_ACCESS(
             low,
             willQos,
@@ -223,12 +214,11 @@ struct ConnectFields
         
     };
     
-    /// @brief Definition of <b>"Keep Alive"<\b> field.
+    /// @brief Definition of <b>"Keep Alive"</b> field.
     struct KeepAlive : public
         comms::field::IntValue<
             mqtt311::field::FieldBase<>,
-            std::uint16_t,
-            typename TOpt::message::ConnectFields::KeepAlive
+            std::uint16_t
         >
     {
         /// @brief Name of the field.
@@ -239,11 +229,10 @@ struct ConnectFields
         
     };
     
-    /// @brief Definition of <b>"Client ID"<\b> field.
+    /// @brief Definition of <b>"Client ID"</b> field.
     struct ClientId : public
         mqtt311::field::String<
-           TOpt,
-           typename TOpt::message::ConnectFields::ClientId
+           TOpt
        >
     {
         /// @brief Name of the field.
@@ -257,11 +246,10 @@ struct ConnectFields
     /// @brief Scope for all the member fields of @ref WillTopic optional.
     struct WillTopicMembers
     {
-        /// @brief Definition of <b>"Will Topic"<\b> field.
+        /// @brief Definition of <b>"Will Topic"</b> field.
         struct WillTopic : public
             mqtt311::field::String<
-               TOpt,
-               typename TOpt::message::ConnectFields::WillTopicMembers::WillTopic
+               TOpt
            >
         {
             /// @brief Name of the field.
@@ -274,11 +262,10 @@ struct ConnectFields
         
     };
     
-    /// @brief Definition of <b>"Will Topic"<\b> field.
+    /// @brief Definition of <b>"Will Topic"</b> field.
     struct WillTopic : public
         comms::field::Optional<
             typename WillTopicMembers::WillTopic,
-            typename TOpt::message::ConnectFields::WillTopic,
             comms::option::MissingByDefault
         >
     {
@@ -293,11 +280,10 @@ struct ConnectFields
     /// @brief Scope for all the member fields of @ref WillMessage optional.
     struct WillMessageMembers
     {
-        /// @brief Definition of <b>"Will Message"<\b> field.
+        /// @brief Definition of <b>"Will Message"</b> field.
         struct WillMessage : public
             mqtt311::field::BinData<
-               TOpt,
-               typename TOpt::message::ConnectFields::WillMessageMembers::WillMessage
+               TOpt
            >
         {
             /// @brief Name of the field.
@@ -310,11 +296,10 @@ struct ConnectFields
         
     };
     
-    /// @brief Definition of <b>"Will Message"<\b> field.
+    /// @brief Definition of <b>"Will Message"</b> field.
     struct WillMessage : public
         comms::field::Optional<
             typename WillMessageMembers::WillMessage,
-            typename TOpt::message::ConnectFields::WillMessage,
             comms::option::MissingByDefault
         >
     {
@@ -329,11 +314,10 @@ struct ConnectFields
     /// @brief Scope for all the member fields of @ref UserName optional.
     struct UserNameMembers
     {
-        /// @brief Definition of <b>"User Name"<\b> field.
+        /// @brief Definition of <b>"User Name"</b> field.
         struct UserName : public
             mqtt311::field::String<
-               TOpt,
-               typename TOpt::message::ConnectFields::UserNameMembers::UserName
+               TOpt
            >
         {
             /// @brief Name of the field.
@@ -346,11 +330,10 @@ struct ConnectFields
         
     };
     
-    /// @brief Definition of <b>"User Name"<\b> field.
+    /// @brief Definition of <b>"User Name"</b> field.
     struct UserName : public
         comms::field::Optional<
             typename UserNameMembers::UserName,
-            typename TOpt::message::ConnectFields::UserName,
             comms::option::MissingByDefault
         >
     {
@@ -365,11 +348,10 @@ struct ConnectFields
     /// @brief Scope for all the member fields of @ref Password optional.
     struct PasswordMembers
     {
-        /// @brief Definition of <b>"Password"<\b> field.
+        /// @brief Definition of <b>"Password"</b> field.
         struct Password : public
             mqtt311::field::BinData<
-               TOpt,
-               typename TOpt::message::ConnectFields::PasswordMembers::Password
+               TOpt
            >
         {
             /// @brief Name of the field.
@@ -382,11 +364,10 @@ struct ConnectFields
         
     };
     
-    /// @brief Definition of <b>"Password"<\b> field.
+    /// @brief Definition of <b>"Password"</b> field.
     struct Password : public
         comms::field::Optional<
             typename PasswordMembers::Password,
-            typename TOpt::message::ConnectFields::Password,
             comms::option::MissingByDefault
         >
     {
@@ -412,7 +393,7 @@ struct ConnectFields
     >;
 };
 
-/// @brief Definition of <b>"CONNECT"<\b> message class.
+/// @brief Definition of <b>"CONNECT"</b> message class.
 /// @details
 ///     See @ref ConnectFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.
@@ -426,8 +407,7 @@ class Connect : public
         comms::option::StaticNumIdImpl<mqtt311::MsgId_Connect>,
         comms::option::FieldsImpl<typename ConnectFields<TOpt>::All>,
         comms::option::MsgType<Connect<TMsgBase, TOpt> >,
-        comms::option::HasName,
-        comms::option::HasCustomRefresh
+        comms::option::HasName
     >
 {
     // Redefinition of the base class type
@@ -438,8 +418,7 @@ class Connect : public
             comms::option::StaticNumIdImpl<mqtt311::MsgId_Connect>,
             comms::option::FieldsImpl<typename ConnectFields<TOpt>::All>,
             comms::option::MsgType<Connect<TMsgBase, TOpt> >,
-            comms::option::HasName,
-            comms::option::HasCustomRefresh
+            comms::option::HasName
         >;
 
 public:
@@ -479,81 +458,6 @@ public:
     {
         return "CONNECT";
     }
-    
-    /// @brief Custom read functionality
-    template <typename TIter>
-    comms::ErrorStatus doRead(TIter& iter, std::size_t len)
-    {
-        auto es = Base::template doReadFieldsUntil<FieldIdx_clientId>(iter, len);
-        if (es != comms::ErrorStatus::Success) {
-            return es;
-        }
-        
-        doRefresh();
-        return Base::template doReadFieldsFrom<FieldIdx_clientId>(iter, len);
-    }
-    
-    /// @brief Updated validity check
-    bool doValid() const
-    {
-        if ((!Base::doValid()) || (!Base::flagsZeroed())) {
-            return false;
-        }
-        
-        return 
-            (!field_flags().field_high().getBitValue_passwordFlag()) ||
-            (field_flags().field_high().getBitValue_userNameFlag());
-    }
-    
-    /// @brief Custom refresh functionality
-    bool doRefresh()
-    {
-        bool updated = Base::doRefresh();
-        updated = refresh_willTopic() || updated;
-        updated = refresh_willMessage() || updated;
-        updated = refresh_userName() || updated;
-        updated = refresh_password() || updated;
-        return updated;
-    }
-    
-    
-private:
-    template <typename TOptField>
-    static bool refreshOptionalField(bool exists, TOptField& optField)
-    {
-        auto mode = comms::field::OptionalMode::Missing;
-        if (exists) {
-            mode = comms::field::OptionalMode::Exists;
-        }
-        
-        if (optField.getMode() == mode) {
-            return false;
-        }
-        
-        optField.setMode(mode);
-        return true;
-    }
-    
-    bool refresh_willTopic()
-    {
-        return refreshOptionalField(field_flags().field_low().getBitValue_willFlag(), field_willTopic());
-    }
-    
-    bool refresh_willMessage()
-    {
-        return refreshOptionalField(field_flags().field_low().getBitValue_willFlag(), field_willMessage());
-    }
-    
-    bool refresh_userName()
-    {
-        return refreshOptionalField(field_flags().field_high().getBitValue_userNameFlag(), field_userName());
-    }
-    
-    bool refresh_password()
-    {
-        return refreshOptionalField(field_flags().field_high().getBitValue_passwordFlag(), field_password());
-    }
-    
     
     
 };

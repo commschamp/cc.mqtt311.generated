@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"String"<\b> field.
+/// @brief Contains definition of <b>"String"</b> field.
 
 #pragma once
 
@@ -15,7 +15,7 @@ namespace mqtt311
 namespace field
 {
 
-/// @brief Definition of <b>"String"<\b> field.
+/// @brief Definition of <b>"String"</b> field.
 /// @tparam TOpt Protocol options.
 /// @tparam TExtraOpts Extra options.
 template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>

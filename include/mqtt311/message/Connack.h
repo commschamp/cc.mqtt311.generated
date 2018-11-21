@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"CONNACK"<\b> message and its fields.
+/// @brief Contains definition of <b>"CONNACK"</b> message and its fields.
 
 #pragma once
 
@@ -26,21 +26,19 @@ namespace message
 template <typename TOpt = mqtt311::DefaultOptions>
 struct ConnackFields
 {
-    /// @brief Definition of <b>"flags"<\b> field.
+    /// @brief Definition of <b>"Flags"</b> field.
     class Flags : public
         comms::field::BitmaskValue<
             mqtt311::field::FieldBase<>,
-            typename TOpt::message::ConnackFields::Flags,
             comms::option::FixedLength<1U>,
-            comms::option::BitmaskReservedBits<0xfeU, 0x0U>
+            comms::option::BitmaskReservedBits<0xFEU, 0x0U>
         >
     {
         using Base = 
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
-                typename TOpt::message::ConnackFields::Flags,
                 comms::option::FixedLength<1U>,
-                comms::option::BitmaskReservedBits<0xfeU, 0x0U>
+                comms::option::BitmaskReservedBits<0xFEU, 0x0U>
             >;
     public:
         /// @brief Provides names and generates access functions for internal bits.
@@ -49,7 +47,7 @@ struct ConnackFields
         ///     for details.
         ///
         ///      The generated enum values and functions are:
-        ///      @li @b FieldIdx_sp, @b getBitValue_sp() and @b setBitValue_sp().
+        ///      @li @b BitIdx_sp, @b getBitValue_sp() and @b setBitValue_sp().
         COMMS_BITMASK_BITS_SEQ(
             sp
         );
@@ -57,7 +55,7 @@ struct ConnackFields
         /// @brief Name of the field.
         static const char* name()
         {
-            return "flags";
+            return "Flags";
         }
         
     };
@@ -74,12 +72,11 @@ struct ConnackFields
         
     };
     
-    /// @brief Definition of <b>"Return Code"<\b> field.
+    /// @brief Definition of <b>"Return Code"</b> field.
     struct ReturnCode : public
         comms::field::EnumValue<
             mqtt311::field::FieldBase<>,
             ReturnCodeVal,
-            typename TOpt::message::ConnackFields::ReturnCode,
             comms::option::ValidNumValueRange<0, 5>
         >
     {
@@ -98,7 +95,7 @@ struct ConnackFields
     >;
 };
 
-/// @brief Definition of <b>"CONNACK"<\b> message class.
+/// @brief Definition of <b>"CONNACK"</b> message class.
 /// @details
 ///     See @ref ConnackFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.
@@ -150,12 +147,6 @@ public:
     static const char* doName()
     {
         return "CONNACK";
-    }
-    
-    /// @brief Updated validity check
-    bool doValid() const
-    {
-        return Base::doValid() && Base::flagsZeroed();
     }
     
     

@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"PUBLISH"<\b> message and its fields.
+/// @brief Contains definition of <b>"PUBLISH"</b> message and its fields.
 
 #pragma once
 
@@ -13,7 +13,7 @@
 #include "mqtt311/MsgId.h"
 #include "mqtt311/field/FieldBase.h"
 #include "mqtt311/field/PacketId.h"
-#include "mqtt311/field/String.h"
+#include "mqtt311/field/Topic.h"
 
 namespace mqtt311
 {
@@ -28,26 +28,16 @@ namespace message
 template <typename TOpt = mqtt311::DefaultOptions>
 struct PublishFields
 {
-    /// @brief Definition of <b>"Topic"<\b> field.
-    struct Topic : public
-        mqtt311::field::String<
-           TOpt,
-           typename TOpt::message::PublishFields::Topic
-       >
-    {
-        /// @brief Name of the field.
-        static const char* name()
-        {
-            return "Topic";
-        }
-        
-    };
+    /// @brief Definition of <b>"Topic"</b> field.
+    using Topic =
+        mqtt311::field::Topic<
+           TOpt
+       >;
     
-    /// @brief Definition of <b>"Packet ID"<\b> field.
+    /// @brief Definition of <b>"Packet ID"</b> field.
     struct PacketId : public
         comms::field::Optional<
             mqtt311::field::PacketId<TOpt>,
-            typename TOpt::message::PublishFields::PacketId,
             comms::option::MissingByDefault
         >
     {
@@ -59,7 +49,7 @@ struct PublishFields
         
     };
     
-    /// @brief Definition of <b>"Payload"<\b> field.
+    /// @brief Definition of <b>"Payload"</b> field.
     struct Payload : public
         comms::field::ArrayList<
             mqtt311::field::FieldBase<>,
@@ -83,7 +73,7 @@ struct PublishFields
     >;
 };
 
-/// @brief Definition of <b>"PUBLISH"<\b> message class.
+/// @brief Definition of <b>"PUBLISH"</b> message class.
 /// @details
 ///     See @ref PublishFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.
@@ -93,24 +83,20 @@ template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
 class Publish : public
     comms::MessageBase<
         TMsgBase,
-        typename TOpt::message::Publish,
         comms::option::StaticNumIdImpl<mqtt311::MsgId_Publish>,
         comms::option::FieldsImpl<typename PublishFields<TOpt>::All>,
         comms::option::MsgType<Publish<TMsgBase, TOpt> >,
-        comms::option::HasName,
-        comms::option::HasCustomRefresh
+        comms::option::HasName
     >
 {
     // Redefinition of the base class type
     using Base =
         comms::MessageBase<
             TMsgBase,
-            typename TOpt::message::Publish,
             comms::option::StaticNumIdImpl<mqtt311::MsgId_Publish>,
             comms::option::FieldsImpl<typename PublishFields<TOpt>::All>,
             comms::option::MsgType<Publish<TMsgBase, TOpt> >,
-            comms::option::HasName,
-            comms::option::HasCustomRefresh
+            comms::option::HasName
         >;
 
 public:
@@ -139,41 +125,6 @@ public:
         return "PUBLISH";
     }
     
-    /// @brief Custom read functionality
-    template <typename TIter>
-    comms::ErrorStatus doRead(TIter& iter, std::size_t len)
-    {
-        refresh_packetId(); // make sure the mode of "packet ID" is correct
-        return Base::doRead(iter, len);
-    }
-    
-    /// @brief Custom refresh functionality
-    bool doRefresh()
-    {
-        bool updated = Base::doRefresh();
-        return refresh_packetId() || updated;
-    }
-    
-    
-private:
-    bool refresh_packetId()
-    {
-        auto& qosField = Base::transportField_flags().field_qos();
-        using QosFieldType = typename std::decay<decltype(qosField)>::type;
-        using QosValueType = typename QosFieldType::ValueType;
-        
-        auto mode = comms::field::OptionalMode::Missing;
-        if (QosValueType::AtMostOnceDelivery < qosField.value()) {
-            mode = comms::field::OptionalMode::Exists;
-        }
-        
-        if (field_packetId().getMode() == mode) {
-            return false;
-        }
-        
-        field_packetId().setMode(mode);
-        return true;
-    }
     
 };
 

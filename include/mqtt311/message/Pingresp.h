@@ -1,5 +1,5 @@
 /// @file
-/// @brief Contains definition of <b>"PINGRESP"<\b> message and its fields.
+/// @brief Contains definition of <b>"PINGRESP"</b> message and its fields.
 
 #pragma once
 
@@ -26,7 +26,7 @@ struct PingrespFields
     >;
 };
 
-/// @brief Definition of <b>"PINGRESP"<\b> message class.
+/// @brief Definition of <b>"PINGRESP"</b> message class.
 /// @details
 ///     See @ref PingrespFields for definition of the fields this message contains.
 /// @tparam TMsgBase Base (interface) class.
