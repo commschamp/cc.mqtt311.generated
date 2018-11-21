@@ -86,6 +86,12 @@ public:
         return "PUBREL";
     }
     
+    /// @brief Updated validity check
+    bool doValid() const
+    {
+        return Base::doValid() && Base::flagsZeroed();
+    }
+    
     
 };
 

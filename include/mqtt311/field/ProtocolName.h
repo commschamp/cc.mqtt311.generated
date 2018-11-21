@@ -49,6 +49,12 @@ public:
         return "Protocol Name";
     }
     
+    /// @brief Custom validity check
+    bool valid() const
+    {
+        return Base::value() == ProtocolName().value();
+    }
+    
 };
 
 } // namespace field

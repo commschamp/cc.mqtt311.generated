@@ -88,6 +88,12 @@ public:
         return "UNSUBACK";
     }
     
+    /// @brief Updated validity check
+    bool doValid() const
+    {
+        return Base::doValid() && Base::flagsZeroed();
+    }
+    
     
 };
 
