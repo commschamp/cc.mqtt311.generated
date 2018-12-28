@@ -22,16 +22,16 @@ template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>
 class ProtocolName : public
     comms::field::String<
         mqtt311::field::FieldBase<>,
-        typename TOpt::field::ProtocolName,
         TExtraOpts...,
+        typename TOpt::field::ProtocolName,
         comms::option::SequenceSerLengthFieldPrefix<mqtt311::field::Length<TOpt> >
     >
 {
     using Base = 
         comms::field::String<
             mqtt311::field::FieldBase<>,
-            typename TOpt::field::ProtocolName,
             TExtraOpts...,
+            typename TOpt::field::ProtocolName,
             comms::option::SequenceSerLengthFieldPrefix<mqtt311::field::Length<TOpt> >
         >;
 public:

@@ -5,6 +5,7 @@
 
 #include "comms/Field.h"
 #include "comms/options.h"
+#include "mqtt311/Version.h"
 
 namespace mqtt311
 {

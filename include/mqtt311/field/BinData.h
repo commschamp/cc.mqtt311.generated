@@ -24,8 +24,8 @@ struct BinData : public
     comms::field::ArrayList<
         mqtt311::field::FieldBase<>,
         std::uint8_t,
-        typename TOpt::field::BinData,
         TExtraOpts...,
+        typename TOpt::field::BinData,
         comms::option::SequenceSerLengthFieldPrefix<mqtt311::field::Length<TOpt> >
     >
 {
