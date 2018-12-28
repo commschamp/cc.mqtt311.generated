@@ -22,8 +22,8 @@ template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>
 struct String : public
     comms::field::String<
         mqtt311::field::FieldBase<>,
-        typename TOpt::field::String,
         TExtraOpts...,
+        typename TOpt::field::String,
         comms::option::SequenceSerLengthFieldPrefix<mqtt311::field::Length<TOpt> >
     >
 {
