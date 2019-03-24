@@ -15,7 +15,7 @@ namespace mqtt311
 namespace field
 {
 
-/// @brief Values enumerator for @ref Qos field.
+/// @brief Values enumerator for @ref mqtt311::field::Qos field.
 enum class QosVal : std::uint8_t
 {
     AtMostOnceDelivery = 0, ///< value @b AtMostOnceDelivery
@@ -25,6 +25,7 @@ enum class QosVal : std::uint8_t
 };
 
 /// @brief Definition of <b>"Qos"</b> field.
+/// @see @ref mqtt311::field::QosVal
 /// @tparam TOpt Protocol options.
 /// @tparam TExtraOpts Extra options.
 template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>

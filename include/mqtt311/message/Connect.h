@@ -107,7 +107,7 @@ struct ConnectFields
             
         };
         
-        /// @brief Values enumerator for @ref WillQos field.
+        /// @brief Values enumerator for @ref mqtt311::message::ConnectFields::FlagsMembers::WillQos field.
         enum class WillQosVal : std::uint8_t
         {
             AtMostOnceDelivery = 0, ///< value @b AtMostOnceDelivery
@@ -117,6 +117,7 @@ struct ConnectFields
         };
         
         /// @brief Definition of <b>"Will QoS"</b> field.
+        /// @see @ref mqtt311::message::ConnectFields::FlagsMembers::WillQosVal
         struct WillQos : public
             comms::field::EnumValue<
                 mqtt311::field::FieldBase<>,
