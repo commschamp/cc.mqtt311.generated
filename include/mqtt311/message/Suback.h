@@ -36,7 +36,7 @@ struct SubackFields
     /// @brief Scope for all the member fields of @ref List list.
     struct ListMembers
     {
-        /// @brief Values enumerator for @ref ReturnCode field.
+        /// @brief Values enumerator for @ref mqtt311::message::SubackFields::ListMembers::ReturnCode field.
         enum class ReturnCodeVal : std::uint8_t
         {
             Qos0 = 0, ///< value <b>Max QoS 0</b>.
@@ -47,6 +47,7 @@ struct SubackFields
         };
         
         /// @brief Definition of <b>"Return Code"</b> field.
+        /// @see @ref mqtt311::message::SubackFields::ListMembers::ReturnCodeVal
         struct ReturnCode : public
             comms::field::EnumValue<
                 mqtt311::field::FieldBase<>,

@@ -60,7 +60,7 @@ struct ConnackFields
         
     };
     
-    /// @brief Values enumerator for @ref ReturnCode field.
+    /// @brief Values enumerator for @ref mqtt311::message::ConnackFields::ReturnCode field.
     enum class ReturnCodeVal : std::uint8_t
     {
         Accepted = 0, ///< value @b Accepted
@@ -73,6 +73,7 @@ struct ConnackFields
     };
     
     /// @brief Definition of <b>"Return Code"</b> field.
+    /// @see @ref mqtt311::message::ConnackFields::ReturnCodeVal
     struct ReturnCode : public
         comms::field::EnumValue<
             mqtt311::field::FieldBase<>,
