@@ -10,10 +10,10 @@
 #include "comms/options.h"
 #include "comms/protocol/MsgDataLayer.h"
 #include "comms/protocol/MsgSizeLayer.h"
-#include "mqtt311/AllMessages.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/field/FieldBase.h"
 #include "mqtt311/frame/layer/IdAndFlags.h"
+#include "mqtt311/input/AllMessages.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -25,7 +25,7 @@ namespace frame
 /// @tparam TOpt Protocol options.
 /// @see @ref Frame
 /// @headerfile "mqtt311/frame/Frame.h"
-template <typename TOpt = mqtt311::DefaultOptions>
+template <typename TOpt = mqtt311::options::DefaultOptions>
 struct FrameLayers
 {
     /// @brief Definition of layer "Data".
@@ -168,8 +168,8 @@ struct FrameLayers
 /// @headerfile "mqtt311/frame/Frame.h"
 template <
    typename TMessage,
-   typename TAllMessages = mqtt311::AllMessages<TMessage>,
-   typename TOpt = mqtt311::DefaultOptions
+   typename TAllMessages = mqtt311::input::AllMessages<TMessage>,
+   typename TOpt = mqtt311::options::DefaultOptions
 >
 class Frame : public
     FrameLayers<TOpt>::template Stack<TMessage, TAllMessages>

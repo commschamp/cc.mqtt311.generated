@@ -6,10 +6,10 @@
 #include <tuple>
 #include "comms/MessageBase.h"
 #include "comms/options.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/MsgId.h"
 #include "mqtt311/field/FieldBase.h"
 #include "mqtt311/field/PacketId.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -21,14 +21,14 @@ namespace message
 /// @tparam TOpt Extra options
 /// @see @ref Pubrec
 /// @headerfile "mqtt311/message/Pubrec.h"
-template <typename TOpt = mqtt311::DefaultOptions>
+template <typename TOpt = mqtt311::options::DefaultOptions>
 struct PubrecFields
 {
     /// @brief Definition of <b>"Packet ID"</b> field.
     using PacketId =
         mqtt311::field::PacketId<
-           TOpt
-       >;
+            TOpt
+        >;
     
     /// @brief All the fields bundled in std::tuple.
     using All = std::tuple<
@@ -42,7 +42,7 @@ struct PubrecFields
 /// @tparam TMsgBase Base (interface) class.
 /// @tparam TOpt Extra options
 /// @headerfile "mqtt311/message/Pubrec.h"
-template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
+template <typename TMsgBase, typename TOpt = mqtt311::options::DefaultOptions>
 class Pubrec : public
     comms::MessageBase<
         TMsgBase,

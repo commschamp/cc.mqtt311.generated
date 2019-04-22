@@ -5,9 +5,9 @@
 
 #include "comms/field/String.h"
 #include "comms/options.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/field/FieldBase.h"
 #include "mqtt311/field/Length.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -18,7 +18,7 @@ namespace field
 /// @brief Definition of <b>"String"</b> field.
 /// @tparam TOpt Protocol options.
 /// @tparam TExtraOpts Extra options.
-template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>
+template <typename TOpt = mqtt311::options::DefaultOptions, typename... TExtraOpts>
 struct String : public
     comms::field::String<
         mqtt311::field::FieldBase<>,

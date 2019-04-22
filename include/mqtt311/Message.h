@@ -5,6 +5,7 @@
 
 #include <cstdint>
 #include <tuple>
+#include <type_traits>
 #include "comms/Message.h"
 #include "comms/field/Bitfield.h"
 #include "comms/field/BitmaskValue.h"
@@ -54,6 +55,23 @@ struct MessageFields
                 return "";
             }
             
+            /// @brief Retrieve name of the bit
+            static const char* bitName(BitIdx idx)
+            {
+                static const char* Map[] = {
+                    "retain"
+                };
+            
+                static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+                static_assert(MapSize == BitIdx_numOfValues, "Invalid map");
+            
+                if (MapSize <= static_cast<std::size_t>(idx)) {
+                    return nullptr;
+                }
+            
+                return Map[static_cast<std::size_t>(idx)];
+            }
+            
         };
         
         /// @brief Values enumerator for @ref Qos field.
@@ -79,6 +97,23 @@ struct MessageFields
             static const char* name()
             {
                 return "Qos";
+            }
+            
+            /// @brief Retrieve name of the enum value
+            static const char* valueName(QosVal val)
+            {
+                static const char* Map[] = {
+                    "AtMostOnceDelivery",
+                    "AtLeastOnceDelivery",
+                    "ExactlyOnceDelivery"
+                };
+                static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+                
+                if (MapSize <= static_cast<std::size_t>(val)) {
+                    return nullptr;
+                }
+                
+                return Map[static_cast<std::size_t>(val)];
             }
             
         };
@@ -113,6 +148,23 @@ struct MessageFields
             static const char* name()
             {
                 return "";
+            }
+            
+            /// @brief Retrieve name of the bit
+            static const char* bitName(BitIdx idx)
+            {
+                static const char* Map[] = {
+                    "dup"
+                };
+            
+                static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+                static_assert(MapSize == BitIdx_numOfValues, "Invalid map");
+            
+                if (MapSize <= static_cast<std::size_t>(idx)) {
+                    return nullptr;
+                }
+            
+                return Map[static_cast<std::size_t>(idx)];
             }
             
         };

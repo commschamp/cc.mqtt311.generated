@@ -5,8 +5,8 @@
 
 #include <tuple>
 #include "comms/MessageBase.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/MsgId.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -18,7 +18,7 @@ namespace message
 /// @tparam TOpt Extra options
 /// @see @ref Disconnect
 /// @headerfile "mqtt311/message/Disconnect.h"
-template <typename TOpt = mqtt311::DefaultOptions>
+template <typename TOpt = mqtt311::options::DefaultOptions>
 struct DisconnectFields
 {
     /// @brief All the fields bundled in std::tuple.
@@ -32,7 +32,7 @@ struct DisconnectFields
 /// @tparam TMsgBase Base (interface) class.
 /// @tparam TOpt Extra options
 /// @headerfile "mqtt311/message/Disconnect.h"
-template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
+template <typename TMsgBase, typename TOpt = mqtt311::options::DefaultOptions>
 class Disconnect : public
     comms::MessageBase<
         TMsgBase,

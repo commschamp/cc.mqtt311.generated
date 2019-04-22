@@ -3,16 +3,19 @@
 
 #pragma once
 
+#include <algorithm>
 #include <cstdint>
+#include <iterator>
 #include <tuple>
+#include <utility>
 #include "comms/MessageBase.h"
 #include "comms/field/ArrayList.h"
 #include "comms/field/EnumValue.h"
 #include "comms/options.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/MsgId.h"
 #include "mqtt311/field/FieldBase.h"
 #include "mqtt311/field/PacketId.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -24,14 +27,14 @@ namespace message
 /// @tparam TOpt Extra options
 /// @see @ref Suback
 /// @headerfile "mqtt311/message/Suback.h"
-template <typename TOpt = mqtt311::DefaultOptions>
+template <typename TOpt = mqtt311::options::DefaultOptions>
 struct SubackFields
 {
     /// @brief Definition of <b>"Packet ID"</b> field.
     using PacketId =
         mqtt311::field::PacketId<
-           TOpt
-       >;
+            TOpt
+        >;
     
     /// @brief Scope for all the member fields of @ref List list.
     struct ListMembers
@@ -60,6 +63,31 @@ struct SubackFields
             static const char* name()
             {
                 return "Return Code";
+            }
+            
+            /// @brief Retrieve name of the enum value
+            static const char* valueName(ReturnCodeVal val)
+            {
+                using NameInfo = std::pair<ReturnCodeVal, const char*>;
+                static const NameInfo Map[] = {
+                    std::make_pair(ReturnCodeVal::Qos0, "Max QoS 0"),
+                    std::make_pair(ReturnCodeVal::Qos1, "Max QoS 1"),
+                    std::make_pair(ReturnCodeVal::Qos2, "Max QoS 2"),
+                    std::make_pair(ReturnCodeVal::Failure, "Failure")
+                };
+                
+                auto iter = std::lower_bound(
+                    std::begin(Map), std::end(Map), val,
+                    [](const NameInfo& info, ReturnCodeVal v) -> bool
+                    {
+                        return info.first < v;
+                    });
+                
+                if ((iter == std::end(Map)) || (iter->first != val)) {
+                    return nullptr;
+                }
+                
+                return iter->second;
             }
             
         };
@@ -95,7 +123,7 @@ struct SubackFields
 /// @tparam TMsgBase Base (interface) class.
 /// @tparam TOpt Extra options
 /// @headerfile "mqtt311/message/Suback.h"
-template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
+template <typename TMsgBase, typename TOpt = mqtt311::options::DefaultOptions>
 class Suback : public
     comms::MessageBase<
         TMsgBase,

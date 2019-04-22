@@ -5,8 +5,8 @@
 
 #include <tuple>
 #include "comms/MessageBase.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/MsgId.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -18,7 +18,7 @@ namespace message
 /// @tparam TOpt Extra options
 /// @see @ref Pingreq
 /// @headerfile "mqtt311/message/Pingreq.h"
-template <typename TOpt = mqtt311::DefaultOptions>
+template <typename TOpt = mqtt311::options::DefaultOptions>
 struct PingreqFields
 {
     /// @brief All the fields bundled in std::tuple.
@@ -32,7 +32,7 @@ struct PingreqFields
 /// @tparam TMsgBase Base (interface) class.
 /// @tparam TOpt Extra options
 /// @headerfile "mqtt311/message/Pingreq.h"
-template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
+template <typename TMsgBase, typename TOpt = mqtt311::options::DefaultOptions>
 class Pingreq : public
     comms::MessageBase<
         TMsgBase,

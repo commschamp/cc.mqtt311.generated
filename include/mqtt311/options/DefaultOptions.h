@@ -8,6 +8,9 @@
 namespace mqtt311
 {
 
+namespace options
+{
+
 /// @brief Default (empty) options of the protocol.
 struct DefaultOptions
 {
@@ -108,6 +111,8 @@ struct DefaultOptions
     
     
 };
+
+} // namespace options
 
 } // namespace mqtt311
 

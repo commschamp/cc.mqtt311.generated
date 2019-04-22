@@ -4,10 +4,11 @@
 #pragma once
 
 #include <cstdint>
+#include <type_traits>
 #include "comms/field/EnumValue.h"
 #include "comms/options.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/field/FieldBase.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -28,7 +29,7 @@ enum class QosVal : std::uint8_t
 /// @see @ref mqtt311::field::QosVal
 /// @tparam TOpt Protocol options.
 /// @tparam TExtraOpts Extra options.
-template <typename TOpt = mqtt311::DefaultOptions, typename... TExtraOpts>
+template <typename TOpt = mqtt311::options::DefaultOptions, typename... TExtraOpts>
 struct Qos : public
     comms::field::EnumValue<
         mqtt311::field::FieldBase<>,
@@ -41,6 +42,23 @@ struct Qos : public
     static const char* name()
     {
         return "Qos";
+    }
+    
+    /// @brief Retrieve name of the enum value
+    static const char* valueName(QosVal val)
+    {
+        static const char* Map[] = {
+            "AtMostOnceDelivery",
+            "AtLeastOnceDelivery",
+            "ExactlyOnceDelivery"
+        };
+        static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+        
+        if (MapSize <= static_cast<std::size_t>(val)) {
+            return nullptr;
+        }
+        
+        return Map[static_cast<std::size_t>(val)];
     }
     
 };

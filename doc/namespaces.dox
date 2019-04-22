@@ -16,3 +16,9 @@
 /// @namespace mqtt311::frame::checksum
 /// @brief Main namespace for the custom frame layers.
 
+/// @namespace mqtt311::options
+/// @brief Main namespace for the various protocol options.
+
+/// @namespace mqtt311::input
+/// @brief Main namespace for hold input messages bundles.
+

@@ -7,11 +7,11 @@
 #include "comms/MessageBase.h"
 #include "comms/field/ArrayList.h"
 #include "comms/options.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/MsgId.h"
 #include "mqtt311/field/FieldBase.h"
 #include "mqtt311/field/PacketId.h"
 #include "mqtt311/field/Topic.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -23,14 +23,14 @@ namespace message
 /// @tparam TOpt Extra options
 /// @see @ref Unsubscribe
 /// @headerfile "mqtt311/message/Unsubscribe.h"
-template <typename TOpt = mqtt311::DefaultOptions>
+template <typename TOpt = mqtt311::options::DefaultOptions>
 struct UnsubscribeFields
 {
     /// @brief Definition of <b>"Packet ID"</b> field.
     using PacketId =
         mqtt311::field::PacketId<
-           TOpt
-       >;
+            TOpt
+        >;
     
     /// @brief Scope for all the member fields of @ref List list.
     struct ListMembers
@@ -38,8 +38,8 @@ struct UnsubscribeFields
         /// @brief Definition of <b>"Topic"</b> field.
         using Topic =
             mqtt311::field::Topic<
-               TOpt
-           >;
+                TOpt
+            >;
         
     };
     
@@ -72,7 +72,7 @@ struct UnsubscribeFields
 /// @tparam TMsgBase Base (interface) class.
 /// @tparam TOpt Extra options
 /// @headerfile "mqtt311/message/Unsubscribe.h"
-template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
+template <typename TMsgBase, typename TOpt = mqtt311::options::DefaultOptions>
 class Unsubscribe : public
     comms::MessageBase<
         TMsgBase,
