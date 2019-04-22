@@ -8,12 +8,12 @@
 #include "comms/field/ArrayList.h"
 #include "comms/field/Bundle.h"
 #include "comms/options.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/MsgId.h"
 #include "mqtt311/field/FieldBase.h"
 #include "mqtt311/field/PacketId.h"
 #include "mqtt311/field/Qos.h"
 #include "mqtt311/field/Topic.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -25,14 +25,14 @@ namespace message
 /// @tparam TOpt Extra options
 /// @see @ref Subscribe
 /// @headerfile "mqtt311/message/Subscribe.h"
-template <typename TOpt = mqtt311::DefaultOptions>
+template <typename TOpt = mqtt311::options::DefaultOptions>
 struct SubscribeFields
 {
     /// @brief Definition of <b>"Packet ID"</b> field.
     using PacketId =
         mqtt311::field::PacketId<
-           TOpt
-       >;
+            TOpt
+        >;
     
     /// @brief Scope for all the member fields of @ref List list.
     struct ListMembers
@@ -43,14 +43,14 @@ struct SubscribeFields
             /// @brief Definition of <b>"Topic"</b> field.
             using Topic =
                 mqtt311::field::Topic<
-                   TOpt
-               >;
+                    TOpt
+                >;
             
             /// @brief Definition of <b>"Qos"</b> field.
             using Qos =
                 mqtt311::field::Qos<
-                   TOpt
-               >;
+                    TOpt
+                >;
             
             /// @brief All members bundled in @b std::tuple.
             using All =
@@ -125,7 +125,7 @@ struct SubscribeFields
 /// @tparam TMsgBase Base (interface) class.
 /// @tparam TOpt Extra options
 /// @headerfile "mqtt311/message/Subscribe.h"
-template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
+template <typename TMsgBase, typename TOpt = mqtt311::options::DefaultOptions>
 class Subscribe : public
     comms::MessageBase<
         TMsgBase,

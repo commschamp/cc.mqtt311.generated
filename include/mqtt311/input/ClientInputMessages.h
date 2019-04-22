@@ -4,7 +4,6 @@
 #pragma once
 
 #include <tuple>
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/message/Connack.h"
 #include "mqtt311/message/Pingresp.h"
 #include "mqtt311/message/Puback.h"
@@ -14,14 +13,18 @@
 #include "mqtt311/message/Pubrel.h"
 #include "mqtt311/message/Suback.h"
 #include "mqtt311/message/Unsuback.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
+{
+
+namespace input
 {
 
 /// @brief Messages of the protocol in ascending order.
 /// @tparam TBase Base class of all the messages.
 /// @tparam TOpt Protocol definition options.
-template <typename TBase, typename TOpt = mqtt311::DefaultOptions>
+template <typename TBase, typename TOpt = mqtt311::options::DefaultOptions>
 using ClientInputMessages =
     std::tuple<
         mqtt311::message::Connack<TBase, TOpt>,
@@ -34,6 +37,8 @@ using ClientInputMessages =
         mqtt311::message::Unsuback<TBase, TOpt>,
         mqtt311::message::Pingresp<TBase, TOpt>
     >;
+
+} // namespace input
 
 } // namespace mqtt311
 

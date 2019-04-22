@@ -5,13 +5,14 @@
 
 #include <cstdint>
 #include <tuple>
+#include <type_traits>
 #include "comms/MessageBase.h"
 #include "comms/field/BitmaskValue.h"
 #include "comms/field/EnumValue.h"
 #include "comms/options.h"
-#include "mqtt311/DefaultOptions.h"
 #include "mqtt311/MsgId.h"
 #include "mqtt311/field/FieldBase.h"
+#include "mqtt311/options/DefaultOptions.h"
 
 namespace mqtt311
 {
@@ -23,7 +24,7 @@ namespace message
 /// @tparam TOpt Extra options
 /// @see @ref Connack
 /// @headerfile "mqtt311/message/Connack.h"
-template <typename TOpt = mqtt311::DefaultOptions>
+template <typename TOpt = mqtt311::options::DefaultOptions>
 struct ConnackFields
 {
     /// @brief Definition of <b>"Flags"</b> field.
@@ -58,6 +59,23 @@ struct ConnackFields
             return "Flags";
         }
         
+        /// @brief Retrieve name of the bit
+        static const char* bitName(BitIdx idx)
+        {
+            static const char* Map[] = {
+                "Session Present"
+            };
+        
+            static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+            static_assert(MapSize == BitIdx_numOfValues, "Invalid map");
+        
+            if (MapSize <= static_cast<std::size_t>(idx)) {
+                return nullptr;
+            }
+        
+            return Map[static_cast<std::size_t>(idx)];
+        }
+        
     };
     
     /// @brief Values enumerator for @ref mqtt311::message::ConnackFields::ReturnCode field.
@@ -87,6 +105,26 @@ struct ConnackFields
             return "Return Code";
         }
         
+        /// @brief Retrieve name of the enum value
+        static const char* valueName(ReturnCodeVal val)
+        {
+            static const char* Map[] = {
+                "Accepted",
+                "Bad Protocol Version",
+                "Identifier Rejected",
+                "Server Unavailable",
+                "Bad Auth Details",
+                "Not Authorized"
+            };
+            static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+            
+            if (MapSize <= static_cast<std::size_t>(val)) {
+                return nullptr;
+            }
+            
+            return Map[static_cast<std::size_t>(val)];
+        }
+        
     };
     
     /// @brief All the fields bundled in std::tuple.
@@ -102,7 +140,7 @@ struct ConnackFields
 /// @tparam TMsgBase Base (interface) class.
 /// @tparam TOpt Extra options
 /// @headerfile "mqtt311/message/Connack.h"
-template <typename TMsgBase, typename TOpt = mqtt311::DefaultOptions>
+template <typename TMsgBase, typename TOpt = mqtt311::options::DefaultOptions>
 class Connack : public
     comms::MessageBase<
         TMsgBase,

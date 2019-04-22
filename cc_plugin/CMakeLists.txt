@@ -5,13 +5,13 @@ set (ALL_MESSAGES_LIB "all_messages")
 function (cc_plugin_all_messages)
     set (name "${ALL_MESSAGES_LIB}")
     set (src
-        field/BinData.cpp
         field/Length.cpp
+        field/BinData.cpp
         field/PacketId.cpp
+        field/Topic.cpp
         field/ProtocolName.cpp
         field/Qos.cpp
         field/String.cpp
-        field/Topic.cpp
         Message.cpp
         message/Connack.cpp
         message/Connect.cpp
@@ -40,7 +40,7 @@ function (cc_plugin_all_messages)
         endif()
     endif ()
 
-    if (OPT_FULL_SOLUTION)
+    if (TARGET ${CC_EXTERNAL_TGT})
         add_dependencies(${name} ${CC_EXTERNAL_TGT})
     endif ()
 endfunction()
@@ -117,7 +117,7 @@ cc_plugin_all_messages()
 
 cc_plugin ("Mqtt311")
 
-if (OPT_FULL_SOLUTION)
+if (TARGET ${CC_EXTERNAL_TGT})
     install (
         FILES plugin/Mqtt311.cfg
         DESTINATION ${CONFIG_INSTALL_DIR}

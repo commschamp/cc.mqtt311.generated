@@ -22,6 +22,9 @@ namespace mqtt311
 namespace cc_plugin
 {
 
+namespace input
+{
+
 using AllMessages =
     std::tuple<
         mqtt311::cc_plugin::message::Connect,
@@ -39,6 +42,8 @@ using AllMessages =
         mqtt311::cc_plugin::message::Pingresp,
         mqtt311::cc_plugin::message::Disconnect
     >;
+
+} // namespace input
 
 } // namespace cc_plugin
 

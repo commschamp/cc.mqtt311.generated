@@ -2,7 +2,7 @@
 
 #include "mqtt311/frame/Frame.h"
 #include "cc_plugin/Message.h"
-#include "cc_plugin/AllMessages.h"
+#include "cc_plugin/input/AllMessages.h"
 
 namespace mqtt311
 {
@@ -16,7 +16,7 @@ namespace frame
 using Frame =
     mqtt311::frame::Frame<
         mqtt311::cc_plugin::Message,
-        mqtt311::cc_plugin::AllMessages
+        mqtt311::cc_plugin::input::AllMessages
     >;
 
 } // namespace frame
