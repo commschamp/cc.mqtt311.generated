@@ -9,7 +9,6 @@
 #include "comms/MessageBase.h"
 #include "comms/field/Bitfield.h"
 #include "comms/field/BitmaskValue.h"
-#include "comms/field/EnumValue.h"
 #include "comms/field/IntValue.h"
 #include "comms/field/Optional.h"
 #include "comms/options.h"
@@ -17,6 +16,7 @@
 #include "mqtt311/field/BinData.h"
 #include "mqtt311/field/FieldBase.h"
 #include "mqtt311/field/ProtocolName.h"
+#include "mqtt311/field/Qos.h"
 #include "mqtt311/field/String.h"
 #include "mqtt311/options/DefaultOptions.h"
 
@@ -127,46 +127,17 @@ struct ConnectFields
             
         };
         
-        /// @brief Values enumerator for @ref mqtt311::message::ConnectFields::FlagsMembers::WillQos field.
-        enum class WillQosVal : std::uint8_t
-        {
-            AtMostOnceDelivery = 0, ///< value @b AtMostOnceDelivery
-            AtLeastOnceDelivery = 1, ///< value @b AtLeastOnceDelivery
-            ExactlyOnceDelivery = 2, ///< value @b ExactlyOnceDelivery
-            
-        };
-        
         /// @brief Definition of <b>"Will QoS"</b> field.
-        /// @see @ref mqtt311::message::ConnectFields::FlagsMembers::WillQosVal
         struct WillQos : public
-            comms::field::EnumValue<
-                mqtt311::field::FieldBase<>,
-                WillQosVal,
-                comms::option::FixedBitLength<2U>,
-                comms::option::ValidNumValueRange<0, 2>
+            mqtt311::field::Qos<
+                TOpt,
+                comms::option::FixedBitLength<2U>
             >
         {
             /// @brief Name of the field.
             static const char* name()
             {
                 return "Will QoS";
-            }
-            
-            /// @brief Retrieve name of the enum value
-            static const char* valueName(WillQosVal val)
-            {
-                static const char* Map[] = {
-                    "AtMostOnceDelivery",
-                    "AtLeastOnceDelivery",
-                    "ExactlyOnceDelivery"
-                };
-                static const std::size_t MapSize = std::extent<decltype(Map)>::value;
-                
-                if (MapSize <= static_cast<std::size_t>(val)) {
-                    return nullptr;
-                }
-                
-                return Map[static_cast<std::size_t>(val)];
             }
             
         };

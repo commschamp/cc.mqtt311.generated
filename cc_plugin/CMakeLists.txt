@@ -8,6 +8,7 @@ function (cc_plugin_all_messages)
         field/Length.cpp
         field/BinData.cpp
         field/PacketId.cpp
+        field/MsgId.cpp
         field/Topic.cpp
         field/ProtocolName.cpp
         field/Qos.cpp

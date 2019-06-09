@@ -1,6 +1,8 @@
 #include "FrameTransportMessage.h"
 
 #include "comms_champion/property/field.h"
+#include "cc_plugin/field/MsgId.h"
+
 namespace cc = comms_champion;
 
 namespace mqtt311
@@ -33,11 +35,7 @@ struct IdAndFlagsLayer
         static QVariantMap createProps_id()
         {
             using Field = mqtt311::frame::FrameLayers<>::IdAndFlagsMembers::IdAndFlagsFieldMembers::Id;
-            return
-                cc::property::field::ForField<Field>()
-                    .name(Field::name())
-                    .serialisedHidden()
-                    .asMap();
+            return cc_plugin::field::createProps_msgId(Field::name(), true);
             
         }
         

@@ -11,6 +11,7 @@
 #include "comms/protocol/MsgDataLayer.h"
 #include "comms/protocol/MsgSizeLayer.h"
 #include "mqtt311/field/FieldBase.h"
+#include "mqtt311/field/MsgId.h"
 #include "mqtt311/frame/layer/IdAndFlags.h"
 #include "mqtt311/input/AllMessages.h"
 #include "mqtt311/options/DefaultOptions.h"
@@ -86,9 +87,8 @@ struct FrameLayers
             
             /// @brief Definition of <b>"Id"</b> field.
             struct Id : public
-                comms::field::IntValue<
-                    mqtt311::field::FieldBase<>,
-                    std::uint8_t,
+                mqtt311::field::MsgId<
+                    TOpt,
                     comms::option::FixedBitLength<4U>
                 >
             {
