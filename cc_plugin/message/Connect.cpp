@@ -3,6 +3,7 @@
 #include "comms_champion/property/field.h"
 #include "cc_plugin/field/BinData.h"
 #include "cc_plugin/field/ProtocolName.h"
+#include "cc_plugin/field/Qos.h"
 #include "cc_plugin/field/String.h"
 
 namespace cc = comms_champion;
@@ -54,14 +55,7 @@ struct FlagsMembers
     static QVariantMap createProps_willQos()
     {
         using Field = mqtt311::message::ConnectFields<>::FlagsMembers::WillQos;
-        return
-            cc::property::field::ForField<Field>()
-                .name(Field::name())
-                .serialisedHidden()
-                .add("AtMostOnceDelivery", 0)
-                .add("AtLeastOnceDelivery", 1)
-                .add("ExactlyOnceDelivery", 2)
-                .asMap();
+        return cc_plugin::field::createProps_qos(Field::name(), true);
         
     }
     

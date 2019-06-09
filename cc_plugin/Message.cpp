@@ -1,6 +1,7 @@
 #include "Message.h"
 
 #include "comms_champion/property/field.h"
+#include "cc_plugin/field/Qos.h"
 
 namespace cc = comms_champion;
 
@@ -30,14 +31,7 @@ struct FlagsMembers
     static QVariantMap createProps_qos()
     {
         using Field = mqtt311::MessageFields::FlagsMembers::Qos;
-        return
-            cc::property::field::ForField<Field>()
-                .name(Field::name())
-                .serialisedHidden()
-                .add("AtMostOnceDelivery", 0)
-                .add("AtLeastOnceDelivery", 1)
-                .add("ExactlyOnceDelivery", 2)
-                .asMap();
+        return cc_plugin::field::createProps_qos(Field::name(), true);
         
     }
     
