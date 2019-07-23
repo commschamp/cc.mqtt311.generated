@@ -55,8 +55,8 @@ struct SubackFields
             comms::field::EnumValue<
                 mqtt311::field::FieldBase<>,
                 ReturnCodeVal,
-                comms::option::ValidNumValueRange<0, 2>,
-                comms::option::ValidNumValue<128>
+                comms::option::def::ValidNumValueRange<0, 2>,
+                comms::option::def::ValidNumValue<128>
             >
         {
             /// @brief Name of the field.
@@ -128,10 +128,10 @@ class Suback : public
     comms::MessageBase<
         TMsgBase,
         typename TOpt::message::Suback,
-        comms::option::StaticNumIdImpl<mqtt311::MsgId_Suback>,
-        comms::option::FieldsImpl<typename SubackFields<TOpt>::All>,
-        comms::option::MsgType<Suback<TMsgBase, TOpt> >,
-        comms::option::HasName
+        comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Suback>,
+        comms::option::def::FieldsImpl<typename SubackFields<TOpt>::All>,
+        comms::option::def::MsgType<Suback<TMsgBase, TOpt> >,
+        comms::option::def::HasName
     >
 {
     // Redefinition of the base class type
@@ -139,10 +139,10 @@ class Suback : public
         comms::MessageBase<
             TMsgBase,
             typename TOpt::message::Suback,
-            comms::option::StaticNumIdImpl<mqtt311::MsgId_Suback>,
-            comms::option::FieldsImpl<typename SubackFields<TOpt>::All>,
-            comms::option::MsgType<Suback<TMsgBase, TOpt> >,
-            comms::option::HasName
+            comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Suback>,
+            comms::option::def::FieldsImpl<typename SubackFields<TOpt>::All>,
+            comms::option::def::MsgType<Suback<TMsgBase, TOpt> >,
+            comms::option::def::HasName
         >;
 
 public:

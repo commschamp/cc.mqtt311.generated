@@ -38,7 +38,7 @@ struct PublishFields
     struct PacketId : public
         comms::field::Optional<
             mqtt311::field::PacketId<TOpt>,
-            comms::option::MissingByDefault
+            comms::option::def::MissingByDefault
         >
     {
         /// @brief Name of the field.
@@ -83,22 +83,22 @@ template <typename TMsgBase, typename TOpt = mqtt311::options::DefaultOptions>
 class Publish : public
     comms::MessageBase<
         TMsgBase,
-        comms::option::StaticNumIdImpl<mqtt311::MsgId_Publish>,
-        comms::option::FieldsImpl<typename PublishFields<TOpt>::All>,
-        comms::option::MsgType<Publish<TMsgBase, TOpt> >,
-        comms::option::HasName,
-        comms::option::HasCustomRefresh
+        comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Publish>,
+        comms::option::def::FieldsImpl<typename PublishFields<TOpt>::All>,
+        comms::option::def::MsgType<Publish<TMsgBase, TOpt> >,
+        comms::option::def::HasName,
+        comms::option::def::HasCustomRefresh
     >
 {
     // Redefinition of the base class type
     using Base =
         comms::MessageBase<
             TMsgBase,
-            comms::option::StaticNumIdImpl<mqtt311::MsgId_Publish>,
-            comms::option::FieldsImpl<typename PublishFields<TOpt>::All>,
-            comms::option::MsgType<Publish<TMsgBase, TOpt> >,
-            comms::option::HasName,
-            comms::option::HasCustomRefresh
+            comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Publish>,
+            comms::option::def::FieldsImpl<typename PublishFields<TOpt>::All>,
+            comms::option::def::MsgType<Publish<TMsgBase, TOpt> >,
+            comms::option::def::HasName,
+            comms::option::def::HasCustomRefresh
         >;
 
 public:

@@ -35,7 +35,7 @@ struct Qos : public
         mqtt311::field::FieldBase<>,
         QosVal,
         TExtraOpts...,
-        comms::option::ValidNumValueRange<0, 2>
+        comms::option::def::ValidNumValueRange<0, 2>
     >
 {
     /// @brief Name of the field.

@@ -31,15 +31,15 @@ struct ConnackFields
     class Flags : public
         comms::field::BitmaskValue<
             mqtt311::field::FieldBase<>,
-            comms::option::FixedLength<1U>,
-            comms::option::BitmaskReservedBits<0xFEU, 0x0U>
+            comms::option::def::FixedLength<1U>,
+            comms::option::def::BitmaskReservedBits<0xFEU, 0x0U>
         >
     {
         using Base = 
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
-                comms::option::FixedLength<1U>,
-                comms::option::BitmaskReservedBits<0xFEU, 0x0U>
+                comms::option::def::FixedLength<1U>,
+                comms::option::def::BitmaskReservedBits<0xFEU, 0x0U>
             >;
     public:
         /// @brief Provides names and generates access functions for internal bits.
@@ -96,7 +96,7 @@ struct ConnackFields
         comms::field::EnumValue<
             mqtt311::field::FieldBase<>,
             ReturnCodeVal,
-            comms::option::ValidNumValueRange<0, 5>
+            comms::option::def::ValidNumValueRange<0, 5>
         >
     {
         /// @brief Name of the field.
@@ -145,10 +145,10 @@ class Connack : public
     comms::MessageBase<
         TMsgBase,
         typename TOpt::message::Connack,
-        comms::option::StaticNumIdImpl<mqtt311::MsgId_Connack>,
-        comms::option::FieldsImpl<typename ConnackFields<TOpt>::All>,
-        comms::option::MsgType<Connack<TMsgBase, TOpt> >,
-        comms::option::HasName
+        comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Connack>,
+        comms::option::def::FieldsImpl<typename ConnackFields<TOpt>::All>,
+        comms::option::def::MsgType<Connack<TMsgBase, TOpt> >,
+        comms::option::def::HasName
     >
 {
     // Redefinition of the base class type
@@ -156,10 +156,10 @@ class Connack : public
         comms::MessageBase<
             TMsgBase,
             typename TOpt::message::Connack,
-            comms::option::StaticNumIdImpl<mqtt311::MsgId_Connack>,
-            comms::option::FieldsImpl<typename ConnackFields<TOpt>::All>,
-            comms::option::MsgType<Connack<TMsgBase, TOpt> >,
-            comms::option::HasName
+            comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Connack>,
+            comms::option::def::FieldsImpl<typename ConnackFields<TOpt>::All>,
+            comms::option::def::MsgType<Connack<TMsgBase, TOpt> >,
+            comms::option::def::HasName
         >;
 
 public:

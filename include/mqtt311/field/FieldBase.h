@@ -19,7 +19,7 @@ template <typename... TOpt>
 using FieldBase =
     comms::Field<
         TOpt...,
-        comms::option::BigEndian
+        comms::option::def::BigEndian
     >;
 
 } // namespace field
