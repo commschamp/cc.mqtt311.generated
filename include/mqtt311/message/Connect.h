@@ -44,8 +44,8 @@ struct ConnectFields
         comms::field::IntValue<
             mqtt311::field::FieldBase<>,
             std::uint8_t,
-            comms::option::DefaultNumValue<4>,
-            comms::option::ValidNumValue<4>
+            comms::option::def::DefaultNumValue<4>,
+            comms::option::def::ValidNumValue<4>
         >
     {
         /// @brief Name of the field.
@@ -63,15 +63,15 @@ struct ConnectFields
         class Low : public
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
-                comms::option::FixedBitLength<3U>,
-                comms::option::BitmaskReservedBits<0x1U, 0x0U>
+                comms::option::def::FixedBitLength<3U>,
+                comms::option::def::BitmaskReservedBits<0x1U, 0x0U>
             >
         {
             using Base = 
                 comms::field::BitmaskValue<
                     mqtt311::field::FieldBase<>,
-                    comms::option::FixedBitLength<3U>,
-                    comms::option::BitmaskReservedBits<0x1U, 0x0U>
+                    comms::option::def::FixedBitLength<3U>,
+                    comms::option::def::BitmaskReservedBits<0x1U, 0x0U>
                 >;
         public:
             /// @brief Provide names for internal bits.
@@ -131,7 +131,7 @@ struct ConnectFields
         struct WillQos : public
             mqtt311::field::Qos<
                 TOpt,
-                comms::option::FixedBitLength<2U>
+                comms::option::def::FixedBitLength<2U>
             >
         {
             /// @brief Name of the field.
@@ -146,13 +146,13 @@ struct ConnectFields
         class High : public
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
-                comms::option::FixedBitLength<3U>
+                comms::option::def::FixedBitLength<3U>
             >
         {
             using Base = 
                 comms::field::BitmaskValue<
                     mqtt311::field::FieldBase<>,
-                    comms::option::FixedBitLength<3U>
+                    comms::option::def::FixedBitLength<3U>
                 >;
         public:
             /// @brief Provides names and generates access functions for internal bits.
@@ -294,7 +294,7 @@ struct ConnectFields
     struct WillTopic : public
         comms::field::Optional<
             typename WillTopicMembers::WillTopic,
-            comms::option::MissingByDefault
+            comms::option::def::MissingByDefault
         >
     {
         /// @brief Name of the field.
@@ -328,7 +328,7 @@ struct ConnectFields
     struct WillMessage : public
         comms::field::Optional<
             typename WillMessageMembers::WillMessage,
-            comms::option::MissingByDefault
+            comms::option::def::MissingByDefault
         >
     {
         /// @brief Name of the field.
@@ -362,7 +362,7 @@ struct ConnectFields
     struct UserName : public
         comms::field::Optional<
             typename UserNameMembers::UserName,
-            comms::option::MissingByDefault
+            comms::option::def::MissingByDefault
         >
     {
         /// @brief Name of the field.
@@ -396,7 +396,7 @@ struct ConnectFields
     struct Password : public
         comms::field::Optional<
             typename PasswordMembers::Password,
-            comms::option::MissingByDefault
+            comms::option::def::MissingByDefault
         >
     {
         /// @brief Name of the field.
@@ -432,11 +432,11 @@ class Connect : public
     comms::MessageBase<
         TMsgBase,
         typename TOpt::message::Connect,
-        comms::option::StaticNumIdImpl<mqtt311::MsgId_Connect>,
-        comms::option::FieldsImpl<typename ConnectFields<TOpt>::All>,
-        comms::option::MsgType<Connect<TMsgBase, TOpt> >,
-        comms::option::HasName,
-        comms::option::HasCustomRefresh
+        comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Connect>,
+        comms::option::def::FieldsImpl<typename ConnectFields<TOpt>::All>,
+        comms::option::def::MsgType<Connect<TMsgBase, TOpt> >,
+        comms::option::def::HasName,
+        comms::option::def::HasCustomRefresh
     >
 {
     // Redefinition of the base class type
@@ -444,11 +444,11 @@ class Connect : public
         comms::MessageBase<
             TMsgBase,
             typename TOpt::message::Connect,
-            comms::option::StaticNumIdImpl<mqtt311::MsgId_Connect>,
-            comms::option::FieldsImpl<typename ConnectFields<TOpt>::All>,
-            comms::option::MsgType<Connect<TMsgBase, TOpt> >,
-            comms::option::HasName,
-            comms::option::HasCustomRefresh
+            comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Connect>,
+            comms::option::def::FieldsImpl<typename ConnectFields<TOpt>::All>,
+            comms::option::def::MsgType<Connect<TMsgBase, TOpt> >,
+            comms::option::def::HasName,
+            comms::option::def::HasCustomRefresh
         >;
 
 public:

@@ -28,11 +28,11 @@
 ///
 /// @section main_frames Frame (Protocol Stack) Classes
 /// The available frame (protocol stack) classes are:
-/// @li @ref mqtt311::frame::Frame from @b mqtt311/frame/Frame.h header file).
+/// @li @ref mqtt311::frame::Frame (from @b mqtt311/frame/Frame.h header file).
 ///
 /// Every frame class/type definition receives (as a template parameter) a list of
 /// @b input message types it is expected to recognize. Default defintion
-/// uses @ref mqtt311::input::AllMessages (defined in @b ).
+/// uses @ref mqtt311::input::AllMessages (defined in @b mqtt311/input/AllMessages.h).
 /// @n If protocol defines any uni-directional message, then it is recommended to use
 /// either @ref mqtt311::input::ServerInputMessages (from @b mqtt311/input/ServerInputMessages.h)
 /// or @ref mqtt311::input::ClientInputMessages  (from @b mqtt311/input/ClientInputMessages.h)
@@ -40,6 +40,33 @@
 /// instructions from <b>Protocol Stack Definition Tutorial</b> page of @b COMMS
 /// library documentation. The extra customization (see @ref main_customization below)
 /// is performed by passing options to the layers themselves.
+///
+/// The available bundles of input messages are:
+/// @li @ref mqtt311::input::AllMessages (from @b mqtt311/input/AllMessages.h header file).
+/// @li @ref mqtt311::input::ServerInputMessages (from @b mqtt311/input/ServerInputMessages.h header file).
+/// @li @ref mqtt311::input::ClientInputMessages (from @b mqtt311/input/ClientInputMessages.h header file).
+///
+/// @section main_dispatch Dispatching Message Objects
+/// While the @b COMMS library provides various built-in ways of 
+/// dispatching message objects into their respective handlers
+/// (see <b>Advanced Guide to Message Dispatching</b> page of the
+/// @b COMMS library documentation), the generated code also provides
+/// additional auxiliary dispatch functions which are @b switch statement
+/// based.
+///
+/// The available functions are:
+/// @li @ref mqtt311::dispatch::dispatchMessage
+/// (defined in @b mqtt311/dispatch/DispatchMessage.h header file).
+/// @li @ref mqtt311::dispatch::dispatchMessageDefaultOptions
+/// (defined in @b mqtt311/dispatch/DispatchMessage.h header file).
+/// @li @ref mqtt311::dispatch::dispatchServerInputMessage
+/// (defined in @b mqtt311/dispatch/DispatchServerInputMessage.h header file).
+/// @li @ref mqtt311::dispatch::dispatchServerInputMessageDefaultOptions
+/// (defined in @b mqtt311/dispatch/DispatchServerInputMessage.h header file).
+/// @li @ref mqtt311::dispatch::dispatchClientInputMessage
+/// (defined in @b mqtt311/dispatch/DispatchClientInputMessage.h header file).
+/// @li @ref mqtt311::dispatch::dispatchClientInputMessageDefaultOptions
+/// (defined in @b mqtt311/dispatch/DispatchClientInputMessage.h header file).
 ///
 /// @section main_customization Customization
 /// Depending on the value of @b customization option passed to the @b commsdsl2comms
@@ -57,7 +84,7 @@
 ///     struct field : public mqtt311::options::DefaultOptions::field
 ///     {
 ///         // use comms::util::StaticString as storage type
-///         using SomeStringField = comms::option::FixedSizeStorage<32>;
+///         using SomeStringField = comms::option::app::FixedSizeStorage<32>;
 ///     };
 /// };
 /// @endcode
@@ -72,15 +99,15 @@
 /// @code
 /// using MyInputMsg =
 ///    mqtt311::Message<
-///        comms::option::ReadIterator<const std::uint8_t*>, // for polymorphic read
-///        comms::option::Handler<MyHandler> // for polymorphic dispatch
+///        comms::option::app::ReadIterator<const std::uint8_t*>, // for polymorphic read
+///        comms::option::app::Handler<MyHandler> // for polymorphic dispatch
 ///    >;
 ///
 /// using MyOutputMsg =
 ///    mqtt311::Message<
-///        comms::option::WriteIterator<std::uint8_t*>, // for polymorphic write
-///        comms::option::LengthInfoInterface, // for polymorphic serialisation length retrieval
-///        comms::option::IdInfoInterface // for polymorphic message ID retrieval
+///        comms::option::app::WriteIterator<std::uint8_t*>, // for polymorphic write
+///        comms::option::app::LengthInfoInterface, // for polymorphic serialisation length retrieval
+///        comms::option::app::IdInfoInterface // for polymorphic message ID retrieval
 ///    >;
 /// @endcode
 /// In case there are only few uni-directional messages, it may make sence to define
@@ -88,11 +115,11 @@
 /// @code
 /// using MyMsg =
 ///    mqtt311::Message<
-///        comms::option::ReadIterator<const std::uint8_t*>, // for polymorphic read
-///        comms::option::Handler<MyHandler> // for polymorphic dispatch
-///        comms::option::WriteIterator<std::uint8_t*>, // for polymorphic write
-///        comms::option::LengthInfoInterface, // for polymorphic serialisation length retrieval
-///        comms::option::IdInfoInterface // for polymorphic message ID retrieval
+///        comms::option::app::ReadIterator<const std::uint8_t*>, // for polymorphic read
+///        comms::option::app::Handler<MyHandler> // for polymorphic dispatch
+///        comms::option::app::WriteIterator<std::uint8_t*>, // for polymorphic write
+///        comms::option::app::LengthInfoInterface, // for polymorphic serialisation length retrieval
+///        comms::option::app::IdInfoInterface // for polymorphic message ID retrieval
 ///    >;
 /// @endcode
 /// In this case the code generator may also define @b mqtt311::options::ServerDefaultOptions
@@ -108,6 +135,6 @@
 ///
 /// In case non-custom &lt;id&gt; layer has been used in schema (files), custom,
 /// application-specific allocation options to it may include
-/// @b comms::option::InPlaceAllocation and/or @b comms::option::SupportGenericMessage.
+/// @b comms::option::app::InPlaceAllocation and/or @b comms::option::app::SupportGenericMessage.
 /// Please see the documentation of the @b COMMS library itself for more details.
 

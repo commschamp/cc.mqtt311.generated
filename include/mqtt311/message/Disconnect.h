@@ -37,10 +37,10 @@ class Disconnect : public
     comms::MessageBase<
         TMsgBase,
         typename TOpt::message::Disconnect,
-        comms::option::StaticNumIdImpl<mqtt311::MsgId_Disconnect>,
-        comms::option::FieldsImpl<typename DisconnectFields<TOpt>::All>,
-        comms::option::MsgType<Disconnect<TMsgBase, TOpt> >,
-        comms::option::HasName
+        comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Disconnect>,
+        comms::option::def::FieldsImpl<typename DisconnectFields<TOpt>::All>,
+        comms::option::def::MsgType<Disconnect<TMsgBase, TOpt> >,
+        comms::option::def::HasName
     >
 {
     // Redefinition of the base class type
@@ -48,10 +48,10 @@ class Disconnect : public
         comms::MessageBase<
             TMsgBase,
             typename TOpt::message::Disconnect,
-            comms::option::StaticNumIdImpl<mqtt311::MsgId_Disconnect>,
-            comms::option::FieldsImpl<typename DisconnectFields<TOpt>::All>,
-            comms::option::MsgType<Disconnect<TMsgBase, TOpt> >,
-            comms::option::HasName
+            comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Disconnect>,
+            comms::option::def::FieldsImpl<typename DisconnectFields<TOpt>::All>,
+            comms::option::def::MsgType<Disconnect<TMsgBase, TOpt> >,
+            comms::option::def::HasName
         >;
 
 public:

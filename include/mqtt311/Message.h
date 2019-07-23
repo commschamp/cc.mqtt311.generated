@@ -28,13 +28,13 @@ struct MessageFields
         class Retain : public
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
-                comms::option::FixedBitLength<1U>
+                comms::option::def::FixedBitLength<1U>
             >
         {
             using Base = 
                 comms::field::BitmaskValue<
                     mqtt311::field::FieldBase<>,
-                    comms::option::FixedBitLength<1U>
+                    comms::option::def::FixedBitLength<1U>
                 >;
         public:
             /// @brief Provides names and generates access functions for internal bits.
@@ -77,22 +77,22 @@ struct MessageFields
         using Qos =
             mqtt311::field::Qos<
                 mqtt311::options::DefaultOptions,
-                comms::option::FixedBitLength<2U>
+                comms::option::def::FixedBitLength<2U>
             >;
         
         /// @brief Definition of <b>""</b> field.
         class Dup : public
             comms::field::BitmaskValue<
                 mqtt311::field::FieldBase<>,
-                comms::option::FixedBitLength<5U>,
-                comms::option::BitmaskReservedBits<0x1EU, 0x0U>
+                comms::option::def::FixedBitLength<5U>,
+                comms::option::def::BitmaskReservedBits<0x1EU, 0x0U>
             >
         {
             using Base = 
                 comms::field::BitmaskValue<
                     mqtt311::field::FieldBase<>,
-                    comms::option::FixedBitLength<5U>,
-                    comms::option::BitmaskReservedBits<0x1EU, 0x0U>
+                    comms::option::def::FixedBitLength<5U>,
+                    comms::option::def::BitmaskReservedBits<0x1EU, 0x0U>
                 >;
         public:
             /// @brief Provides names and generates access functions for internal bits.
@@ -189,17 +189,17 @@ template <typename... TOpt>
 class Message : public
     comms::Message<
         TOpt...,
-        comms::option::BigEndian,
-        comms::option::MsgIdType<mqtt311::MsgId>,
-        comms::option::ExtraTransportFields<MessageFields::All>
+        comms::option::def::BigEndian,
+        comms::option::def::MsgIdType<mqtt311::MsgId>,
+        comms::option::def::ExtraTransportFields<MessageFields::All>
     >
 {
     using Base =
         comms::Message<
             TOpt...,
-            comms::option::BigEndian,
-            comms::option::MsgIdType<mqtt311::MsgId>,
-            comms::option::ExtraTransportFields<MessageFields::All>
+            comms::option::def::BigEndian,
+            comms::option::def::MsgIdType<mqtt311::MsgId>,
+            comms::option::def::ExtraTransportFields<MessageFields::All>
         >;
 public:
     /// @brief Allow access to extra transport fields.

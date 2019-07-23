@@ -41,9 +41,9 @@ struct FrameLayers
         /// @brief Definition of <b>"Size"</b> field.
         struct Size : public
             comms::field::IntValue<
-                mqtt311::field::FieldBase<comms::option::LittleEndian>,
+                mqtt311::field::FieldBase<comms::option::def::LittleEndian>,
                 std::uint32_t,
-                comms::option::VarLength<1U, 4U>
+                comms::option::def::VarLength<1U, 4U>
             >
         {
             /// @brief Name of the field.
@@ -74,7 +74,7 @@ struct FrameLayers
                 comms::field::IntValue<
                     mqtt311::field::FieldBase<>,
                     std::uint8_t,
-                    comms::option::FixedBitLength<4U>
+                    comms::option::def::FixedBitLength<4U>
                 >
             {
                 /// @brief Name of the field.
@@ -89,7 +89,7 @@ struct FrameLayers
             struct Id : public
                 mqtt311::field::MsgId<
                     TOpt,
-                    comms::option::FixedBitLength<4U>
+                    comms::option::def::FixedBitLength<4U>
                 >
             {
                 /// @brief Name of the field.

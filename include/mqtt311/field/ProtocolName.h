@@ -24,7 +24,7 @@ class ProtocolName : public
         mqtt311::field::FieldBase<>,
         TExtraOpts...,
         typename TOpt::field::ProtocolName,
-        comms::option::SequenceSerLengthFieldPrefix<mqtt311::field::Length<TOpt> >
+        comms::option::def::SequenceSerLengthFieldPrefix<mqtt311::field::Length<TOpt> >
     >
 {
     using Base = 
@@ -32,7 +32,7 @@ class ProtocolName : public
             mqtt311::field::FieldBase<>,
             TExtraOpts...,
             typename TOpt::field::ProtocolName,
-            comms::option::SequenceSerLengthFieldPrefix<mqtt311::field::Length<TOpt> >
+            comms::option::def::SequenceSerLengthFieldPrefix<mqtt311::field::Length<TOpt> >
         >;
 public:
     /// @brief Default constructor

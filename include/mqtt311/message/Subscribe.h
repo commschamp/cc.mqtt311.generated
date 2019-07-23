@@ -130,10 +130,10 @@ class Subscribe : public
     comms::MessageBase<
         TMsgBase,
         typename TOpt::message::Subscribe,
-        comms::option::StaticNumIdImpl<mqtt311::MsgId_Subscribe>,
-        comms::option::FieldsImpl<typename SubscribeFields<TOpt>::All>,
-        comms::option::MsgType<Subscribe<TMsgBase, TOpt> >,
-        comms::option::HasName
+        comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Subscribe>,
+        comms::option::def::FieldsImpl<typename SubscribeFields<TOpt>::All>,
+        comms::option::def::MsgType<Subscribe<TMsgBase, TOpt> >,
+        comms::option::def::HasName
     >
 {
     // Redefinition of the base class type
@@ -141,10 +141,10 @@ class Subscribe : public
         comms::MessageBase<
             TMsgBase,
             typename TOpt::message::Subscribe,
-            comms::option::StaticNumIdImpl<mqtt311::MsgId_Subscribe>,
-            comms::option::FieldsImpl<typename SubscribeFields<TOpt>::All>,
-            comms::option::MsgType<Subscribe<TMsgBase, TOpt> >,
-            comms::option::HasName
+            comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Subscribe>,
+            comms::option::def::FieldsImpl<typename SubscribeFields<TOpt>::All>,
+            comms::option::def::MsgType<Subscribe<TMsgBase, TOpt> >,
+            comms::option::def::HasName
         >;
 
 public:

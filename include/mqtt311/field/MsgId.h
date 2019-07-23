@@ -26,7 +26,7 @@ struct MsgId : public
         mqtt311::field::FieldBase<>,
         mqtt311::MsgId,
         TExtraOpts...,
-        comms::option::ValidNumValueRange<1, 14>
+        comms::option::def::ValidNumValueRange<1, 14>
     >
 {
     /// @brief Name of the field.

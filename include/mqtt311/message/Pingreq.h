@@ -37,10 +37,10 @@ class Pingreq : public
     comms::MessageBase<
         TMsgBase,
         typename TOpt::message::Pingreq,
-        comms::option::StaticNumIdImpl<mqtt311::MsgId_Pingreq>,
-        comms::option::FieldsImpl<typename PingreqFields<TOpt>::All>,
-        comms::option::MsgType<Pingreq<TMsgBase, TOpt> >,
-        comms::option::HasName
+        comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Pingreq>,
+        comms::option::def::FieldsImpl<typename PingreqFields<TOpt>::All>,
+        comms::option::def::MsgType<Pingreq<TMsgBase, TOpt> >,
+        comms::option::def::HasName
     >
 {
     // Redefinition of the base class type
@@ -48,10 +48,10 @@ class Pingreq : public
         comms::MessageBase<
             TMsgBase,
             typename TOpt::message::Pingreq,
-            comms::option::StaticNumIdImpl<mqtt311::MsgId_Pingreq>,
-            comms::option::FieldsImpl<typename PingreqFields<TOpt>::All>,
-            comms::option::MsgType<Pingreq<TMsgBase, TOpt> >,
-            comms::option::HasName
+            comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Pingreq>,
+            comms::option::def::FieldsImpl<typename PingreqFields<TOpt>::All>,
+            comms::option::def::MsgType<Pingreq<TMsgBase, TOpt> >,
+            comms::option::def::HasName
         >;
 
 public:

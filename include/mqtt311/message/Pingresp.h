@@ -37,10 +37,10 @@ class Pingresp : public
     comms::MessageBase<
         TMsgBase,
         typename TOpt::message::Pingresp,
-        comms::option::StaticNumIdImpl<mqtt311::MsgId_Pingresp>,
-        comms::option::FieldsImpl<typename PingrespFields<TOpt>::All>,
-        comms::option::MsgType<Pingresp<TMsgBase, TOpt> >,
-        comms::option::HasName
+        comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Pingresp>,
+        comms::option::def::FieldsImpl<typename PingrespFields<TOpt>::All>,
+        comms::option::def::MsgType<Pingresp<TMsgBase, TOpt> >,
+        comms::option::def::HasName
     >
 {
     // Redefinition of the base class type
@@ -48,10 +48,10 @@ class Pingresp : public
         comms::MessageBase<
             TMsgBase,
             typename TOpt::message::Pingresp,
-            comms::option::StaticNumIdImpl<mqtt311::MsgId_Pingresp>,
-            comms::option::FieldsImpl<typename PingrespFields<TOpt>::All>,
-            comms::option::MsgType<Pingresp<TMsgBase, TOpt> >,
-            comms::option::HasName
+            comms::option::def::StaticNumIdImpl<mqtt311::MsgId_Pingresp>,
+            comms::option::def::FieldsImpl<typename PingrespFields<TOpt>::All>,
+            comms::option::def::MsgType<Pingresp<TMsgBase, TOpt> >,
+            comms::option::def::HasName
         >;
 
 public:
