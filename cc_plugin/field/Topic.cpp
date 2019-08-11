@@ -18,7 +18,8 @@ namespace field
 
 QVariantMap createProps_topic(const char* name, bool serHidden)
 {
-    return cc_plugin::field::createProps_string(name, serHidden);
+    auto props = cc_plugin::field::createProps_string(name, serHidden);
+    return props;
     
 }
 
