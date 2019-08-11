@@ -35,7 +35,8 @@ struct IdAndFlagsLayer
         static QVariantMap createProps_id()
         {
             using Field = mqtt311::frame::FrameLayers<>::IdAndFlagsMembers::IdAndFlagsFieldMembers::Id;
-            return cc_plugin::field::createProps_msgId(Field::name(), true);
+            auto props = cc_plugin::field::createProps_msgId(Field::name(), true);
+            return props;
             
         }
         

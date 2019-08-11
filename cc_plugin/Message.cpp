@@ -31,7 +31,8 @@ struct FlagsMembers
     static QVariantMap createProps_qos()
     {
         using Field = mqtt311::MessageFields::FlagsMembers::Qos;
-        return cc_plugin::field::createProps_qos(Field::name(), true);
+        auto props = cc_plugin::field::createProps_qos(Field::name(), true);
+        return props;
         
     }
     

@@ -21,7 +21,8 @@ namespace
 static QVariantMap createProps_topic()
 {
     using Field = mqtt311::message::PublishFields<>::Topic;
-    return cc_plugin::field::createProps_topic(Field::name());
+    auto props = cc_plugin::field::createProps_topic(Field::name());
+    return props;
     
 }
 

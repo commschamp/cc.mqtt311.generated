@@ -3,6 +3,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QtPlugin>
 #include "comms_champion/Plugin.h"
+#include "comms_champion/Protocol.h"
 
 namespace mqtt311
 {
@@ -22,6 +23,8 @@ class Mqtt311Plugin : public comms_champion::Plugin
 public:
     Mqtt311Plugin();
     virtual ~Mqtt311Plugin();
+private:
+    comms_champion::ProtocolPtr m_protocol;
 };
 
 } // namespace plugin

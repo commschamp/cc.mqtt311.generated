@@ -14,13 +14,15 @@ namespace plugin
 {
 
 Mqtt311Plugin::Mqtt311Plugin()
+  : m_protocol(new Mqtt311Protocol())
 {
     pluginProperties()
         .setProtocolCreateFunc(
-            []() -> cc::ProtocolPtr
+            [this]() -> cc::ProtocolPtr
             {
-                return cc::ProtocolPtr(new Mqtt311Protocol());
-            });
+                return m_protocol;
+            })
+            ;
 }
 
 Mqtt311Plugin::~Mqtt311Plugin() = default;

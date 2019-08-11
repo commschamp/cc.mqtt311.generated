@@ -20,7 +20,8 @@ namespace
 static QVariantMap createProps_packetId()
 {
     using Field = mqtt311::message::PubrecFields<>::PacketId;
-    return cc_plugin::field::createProps_packetId(Field::name());
+    auto props = cc_plugin::field::createProps_packetId(Field::name());
+    return props;
     
 }
 
