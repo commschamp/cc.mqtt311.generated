@@ -26,6 +26,65 @@ namespace mqtt311
 namespace message
 {
 
+/// @brief Common definitions for fields from @ref ConnectFields.
+/// @see @ref ConnectFields
+/// @headerfile "mqtt311/message/Connect.h"
+struct ConnectFieldsCommon
+{
+    /// @brief Scope for all the common definitions of the member fields of
+    ///     @ref mqtt311::message::ConnectFields::Flags bitfield.
+    struct FlagsMembersCommon
+    {
+        /// @brief Common functions for
+        ///     @ref mqtt311::message::ConnectFields::FlagsMembers::Low field.
+        struct LowCommon
+        {
+            /// @brief Retrieve name of the bit
+            static const char* bitName(std::size_t idx)
+            {
+                static const char* Map[] = {
+                    nullptr,
+                    "Clean Session",
+                    "Will Flag"
+                };
+            
+                static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+                if (MapSize <= idx) {
+                    return nullptr;
+                }
+            
+                return Map[idx];
+            }
+            
+        };
+        
+        /// @brief Common functions for
+        ///     @ref mqtt311::message::ConnectFields::FlagsMembers::High field.
+        struct HighCommon
+        {
+            /// @brief Retrieve name of the bit
+            static const char* bitName(std::size_t idx)
+            {
+                static const char* Map[] = {
+                    "Will Retain",
+                    "Password Flag",
+                    "User Name Flag"
+                };
+            
+                static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+                if (MapSize <= idx) {
+                    return nullptr;
+                }
+            
+                return Map[idx];
+            }
+            
+        };
+        
+    };
+    
+};
+
 /// @brief Fields of @ref Connect.
 /// @tparam TOpt Extra options
 /// @see @ref Connect
@@ -109,20 +168,9 @@ struct ConnectFields
             /// @brief Retrieve name of the bit
             static const char* bitName(BitIdx idx)
             {
-                static const char* Map[] = {
-                    nullptr,
-                    "Clean Session",
-                    "Will Flag"
-                };
-            
-                static const std::size_t MapSize = std::extent<decltype(Map)>::value;
-                static_assert(MapSize == BitIdx_numOfValues, "Invalid map");
-            
-                if (MapSize <= static_cast<std::size_t>(idx)) {
-                    return nullptr;
-                }
-            
-                return Map[static_cast<std::size_t>(idx)];
+                return
+                    mqtt311::message::ConnectFieldsCommon::FlagsMembersCommon::LowCommon::bitName(
+                        static_cast<std::size_t>(idx));
             }
             
         };
@@ -179,20 +227,9 @@ struct ConnectFields
             /// @brief Retrieve name of the bit
             static const char* bitName(BitIdx idx)
             {
-                static const char* Map[] = {
-                    "Will Retain",
-                    "Password Flag",
-                    "User Name Flag"
-                };
-            
-                static const std::size_t MapSize = std::extent<decltype(Map)>::value;
-                static_assert(MapSize == BitIdx_numOfValues, "Invalid map");
-            
-                if (MapSize <= static_cast<std::size_t>(idx)) {
-                    return nullptr;
-                }
-            
-                return Map[static_cast<std::size_t>(idx)];
+                return
+                    mqtt311::message::ConnectFieldsCommon::FlagsMembersCommon::HighCommon::bitName(
+                        static_cast<std::size_t>(idx));
             }
             
         };
