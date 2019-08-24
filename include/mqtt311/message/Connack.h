@@ -20,6 +20,78 @@ namespace mqtt311
 namespace message
 {
 
+/// @brief Common definitions for fields from @ref ConnackFields.
+/// @see @ref ConnackFields
+/// @headerfile "mqtt311/message/Connack.h"
+struct ConnackFieldsCommon
+{
+    /// @brief Common functions for
+    ///     @ref mqtt311::message::ConnackFields::Flags field.
+    struct FlagsCommon
+    {
+        /// @brief Retrieve name of the bit
+        static const char* bitName(std::size_t idx)
+        {
+            static const char* Map[] = {
+                "Session Present"
+            };
+        
+            static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+            if (MapSize <= idx) {
+                return nullptr;
+            }
+        
+            return Map[idx];
+        }
+        
+    };
+    
+    /// @brief Values enumerator for
+    ///     @ref mqtt311::message::ConnackFields::ReturnCode field.
+    enum class ReturnCodeVal : std::uint8_t
+    {
+        Accepted = 0, ///< value @b Accepted
+        BadProtocolVersion = 1, ///< value <b>Bad Protocol Version</b>.
+        IdentifierRejected = 2, ///< value <b>Identifier Rejected</b>.
+        ServerUnavalable = 3, ///< value <b>Server Unavailable</b>.
+        BadAuth = 4, ///< value <b>Bad Auth Details</b>.
+        NotAuthorized = 5, ///< value <b>Not Authorized</b>.
+        
+        // --- Extra values generated for convenience ---
+        FirstValue = 0, ///< First defined value.
+        LastValue = 5, ///< Last defined value.
+        ValuesLimit = 6, ///< Upper limit for defined values.
+        
+    };
+    
+    /// @brief Common functions for
+    ///     @ref mqtt311::message::ConnackFields::ReturnCode field.
+    struct ReturnCodeCommon
+    {
+        /// @brief Retrieve name of the enum value
+        static const char* valueName(ReturnCodeVal val)
+        {
+            static const char* Map[] = {
+                "Accepted",
+                "Bad Protocol Version",
+                "Identifier Rejected",
+                "Server Unavailable",
+                "Bad Auth Details",
+                "Not Authorized"
+            };
+            static const std::size_t MapSize = std::extent<decltype(Map)>::value;
+            
+            if (MapSize <= static_cast<std::size_t>(val)) {
+                return nullptr;
+            }
+            
+            return Map[static_cast<std::size_t>(val)];
+        }
+        
+    };
+    
+};
+
 /// @brief Fields of @ref Connack.
 /// @tparam TOpt Extra options
 /// @see @ref Connack
@@ -62,33 +134,16 @@ struct ConnackFields
         /// @brief Retrieve name of the bit
         static const char* bitName(BitIdx idx)
         {
-            static const char* Map[] = {
-                "Session Present"
-            };
-        
-            static const std::size_t MapSize = std::extent<decltype(Map)>::value;
-            static_assert(MapSize == BitIdx_numOfValues, "Invalid map");
-        
-            if (MapSize <= static_cast<std::size_t>(idx)) {
-                return nullptr;
-            }
-        
-            return Map[static_cast<std::size_t>(idx)];
+            return
+                mqtt311::message::ConnackFieldsCommon::FlagsCommon::bitName(
+                    static_cast<std::size_t>(idx));
         }
         
     };
     
-    /// @brief Values enumerator for @ref mqtt311::message::ConnackFields::ReturnCode field.
-    enum class ReturnCodeVal : std::uint8_t
-    {
-        Accepted = 0, ///< value @b Accepted
-        BadProtocolVersion = 1, ///< value <b>Bad Protocol Version</b>.
-        IdentifierRejected = 2, ///< value <b>Identifier Rejected</b>.
-        ServerUnavalable = 3, ///< value <b>Server Unavailable</b>.
-        BadAuth = 4, ///< value <b>Bad Auth Details</b>.
-        NotAuthorized = 5, ///< value <b>Not Authorized</b>.
-        
-    };
+    /// @brief Values enumerator for
+    ///     @ref mqtt311::message::ConnackFields::ReturnCode field.
+    using ReturnCodeVal = mqtt311::message::ConnackFieldsCommon::ReturnCodeVal;
     
     /// @brief Definition of <b>"Return Code"</b> field.
     /// @see @ref mqtt311::message::ConnackFields::ReturnCodeVal
@@ -108,21 +163,7 @@ struct ConnackFields
         /// @brief Retrieve name of the enum value
         static const char* valueName(ReturnCodeVal val)
         {
-            static const char* Map[] = {
-                "Accepted",
-                "Bad Protocol Version",
-                "Identifier Rejected",
-                "Server Unavailable",
-                "Bad Auth Details",
-                "Not Authorized"
-            };
-            static const std::size_t MapSize = std::extent<decltype(Map)>::value;
-            
-            if (MapSize <= static_cast<std::size_t>(val)) {
-                return nullptr;
-            }
-            
-            return Map[static_cast<std::size_t>(val)];
+            return mqtt311::message::ConnackFieldsCommon::ReturnCodeCommon::valueName(val);
         }
         
     };

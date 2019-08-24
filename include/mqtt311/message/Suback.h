@@ -23,23 +23,17 @@ namespace mqtt311
 namespace message
 {
 
-/// @brief Fields of @ref Suback.
-/// @tparam TOpt Extra options
-/// @see @ref Suback
+/// @brief Common definitions for fields from @ref SubackFields.
+/// @see @ref SubackFields
 /// @headerfile "mqtt311/message/Suback.h"
-template <typename TOpt = mqtt311::options::DefaultOptions>
-struct SubackFields
+struct SubackFieldsCommon
 {
-    /// @brief Definition of <b>"Packet ID"</b> field.
-    using PacketId =
-        mqtt311::field::PacketId<
-            TOpt
-        >;
-    
-    /// @brief Scope for all the member fields of @ref List list.
-    struct ListMembers
+    /// @brief Scope for all the common definitions of the member fields of
+    ///     @ref mqtt311::message::SubackFields::List list.
+    struct ListMembersCommon
     {
-        /// @brief Values enumerator for @ref mqtt311::message::SubackFields::ListMembers::ReturnCode field.
+        /// @brief Values enumerator for
+        ///     @ref mqtt311::message::SubackFields::ListMembers::ReturnCode field.
         enum class ReturnCodeVal : std::uint8_t
         {
             Qos0 = 0, ///< value <b>Max QoS 0</b>.
@@ -47,24 +41,17 @@ struct SubackFields
             Qos2 = 2, ///< value <b>Max QoS 2</b>.
             Failure = 128, ///< value @b Failure
             
+            // --- Extra values generated for convenience ---
+            FirstValue = 0, ///< First defined value.
+            LastValue = 128, ///< Last defined value.
+            ValuesLimit = 129, ///< Upper limit for defined values.
+            
         };
         
-        /// @brief Definition of <b>"Return Code"</b> field.
-        /// @see @ref mqtt311::message::SubackFields::ListMembers::ReturnCodeVal
-        struct ReturnCode : public
-            comms::field::EnumValue<
-                mqtt311::field::FieldBase<>,
-                ReturnCodeVal,
-                comms::option::def::ValidNumValueRange<0, 2>,
-                comms::option::def::ValidNumValue<128>
-            >
+        /// @brief Common functions for
+        ///     @ref mqtt311::message::SubackFields::ListMembers::ReturnCode field.
+        struct ReturnCodeCommon
         {
-            /// @brief Name of the field.
-            static const char* name()
-            {
-                return "Return Code";
-            }
-            
             /// @brief Retrieve name of the enum value
             static const char* valueName(ReturnCodeVal val)
             {
@@ -88,6 +75,54 @@ struct SubackFields
                 }
                 
                 return iter->second;
+            }
+            
+        };
+        
+    };
+    
+};
+
+/// @brief Fields of @ref Suback.
+/// @tparam TOpt Extra options
+/// @see @ref Suback
+/// @headerfile "mqtt311/message/Suback.h"
+template <typename TOpt = mqtt311::options::DefaultOptions>
+struct SubackFields
+{
+    /// @brief Definition of <b>"Packet ID"</b> field.
+    using PacketId =
+        mqtt311::field::PacketId<
+            TOpt
+        >;
+    
+    /// @brief Scope for all the member fields of ///     @ref List list.
+    struct ListMembers
+    {
+        /// @brief Values enumerator for
+        ///     @ref mqtt311::message::SubackFields::ListMembers::ReturnCode field.
+        using ReturnCodeVal = mqtt311::message::SubackFieldsCommon::ListMembersCommon::ReturnCodeVal;
+        
+        /// @brief Definition of <b>"Return Code"</b> field.
+        /// @see @ref mqtt311::message::SubackFields::ListMembers::ReturnCodeVal
+        struct ReturnCode : public
+            comms::field::EnumValue<
+                mqtt311::field::FieldBase<>,
+                ReturnCodeVal,
+                comms::option::def::ValidNumValueRange<0, 2>,
+                comms::option::def::ValidNumValue<128>
+            >
+        {
+            /// @brief Name of the field.
+            static const char* name()
+            {
+                return "Return Code";
+            }
+            
+            /// @brief Retrieve name of the enum value
+            static const char* valueName(ReturnCodeVal val)
+            {
+                return mqtt311::message::SubackFieldsCommon::ListMembersCommon::ReturnCodeCommon::valueName(val);
             }
             
         };

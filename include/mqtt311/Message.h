@@ -55,20 +55,18 @@ struct MessageFields
             }
             
             /// @brief Retrieve name of the bit
-            static const char* bitName(BitIdx idx)
+            static const char* bitName(std::size_t idx)
             {
                 static const char* Map[] = {
                     "retain"
                 };
             
                 static const std::size_t MapSize = std::extent<decltype(Map)>::value;
-                static_assert(MapSize == BitIdx_numOfValues, "Invalid map");
-            
-                if (MapSize <= static_cast<std::size_t>(idx)) {
+                if (MapSize <= idx) {
                     return nullptr;
                 }
             
-                return Map[static_cast<std::size_t>(idx)];
+                return Map[idx];
             }
             
         };
@@ -113,20 +111,18 @@ struct MessageFields
             }
             
             /// @brief Retrieve name of the bit
-            static const char* bitName(BitIdx idx)
+            static const char* bitName(std::size_t idx)
             {
                 static const char* Map[] = {
                     "dup"
                 };
             
                 static const std::size_t MapSize = std::extent<decltype(Map)>::value;
-                static_assert(MapSize == BitIdx_numOfValues, "Invalid map");
-            
-                if (MapSize <= static_cast<std::size_t>(idx)) {
+                if (MapSize <= idx) {
                     return nullptr;
                 }
             
-                return Map[static_cast<std::size_t>(idx)];
+                return Map[idx];
             }
             
         };

@@ -17,24 +17,10 @@ namespace mqtt311
 namespace field
 {
 
-/// @brief Definition of <b>"MsgId"</b> field.
-/// @tparam TOpt Protocol options.
-/// @tparam TExtraOpts Extra options.
-template <typename TOpt = mqtt311::options::DefaultOptions, typename... TExtraOpts>
-struct MsgId : public
-    comms::field::EnumValue<
-        mqtt311::field::FieldBase<>,
-        mqtt311::MsgId,
-        TExtraOpts...,
-        comms::option::def::ValidNumValueRange<1, 14>
-    >
+/// @brief Common functions for
+///     @ref mqtt311::field::MsgId field.
+struct MsgIdCommon
 {
-    /// @brief Name of the field.
-    static const char* name()
-    {
-        return "MsgId";
-    }
-    
     /// @brief Retrieve name of the enum value
     static const char* valueName(mqtt311::MsgId val)
     {
@@ -62,6 +48,32 @@ struct MsgId : public
         }
         
         return Map[static_cast<std::size_t>(val)];
+    }
+    
+};
+
+/// @brief Definition of <b>"MsgId"</b> field.
+/// @tparam TOpt Protocol options.
+/// @tparam TExtraOpts Extra options.
+template <typename TOpt = mqtt311::options::DefaultOptions, typename... TExtraOpts>
+struct MsgId : public
+    comms::field::EnumValue<
+        mqtt311::field::FieldBase<>,
+        mqtt311::MsgId,
+        TExtraOpts...,
+        comms::option::def::ValidNumValueRange<1, 14>
+    >
+{
+    /// @brief Name of the field.
+    static const char* name()
+    {
+        return "MsgId";
+    }
+    
+    /// @brief Retrieve name of the enum value
+    static const char* valueName(mqtt311::MsgId val)
+    {
+        return mqtt311::field::MsgIdCommon::valueName(val);
     }
     
 };
