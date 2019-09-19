@@ -5,14 +5,14 @@ set (ALL_MESSAGES_LIB "all_messages")
 function (cc_plugin_all_messages)
     set (name "${ALL_MESSAGES_LIB}")
     set (src
-        field/Length.cpp
         field/BinData.cpp
-        field/PacketId.cpp
+        field/Length.cpp
         field/MsgId.cpp
-        field/Topic.cpp
+        field/PacketId.cpp
         field/ProtocolName.cpp
         field/Qos.cpp
         field/String.cpp
+        field/Topic.cpp
         Message.cpp
         message/Connack.cpp
         message/Connect.cpp
