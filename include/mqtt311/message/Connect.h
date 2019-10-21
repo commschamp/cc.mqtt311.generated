@@ -261,7 +261,7 @@ struct ConnectFields
         ///     related to @b comms::field::Bitfield class from COMMS library
         ///     for details.
         ///
-        ///      The generated access functions are:
+        ///     The generated access functions are:
         ///     @li @b field_low() - for FlagsMembers::Low member field.
         ///     @li @b field_willQos() - for FlagsMembers::WillQos member field.
         ///     @li @b field_high() - for FlagsMembers::High member field.

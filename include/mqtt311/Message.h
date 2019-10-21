@@ -154,7 +154,7 @@ struct MessageFields
         ///     related to @b comms::field::Bitfield class from COMMS library
         ///     for details.
         ///
-        ///      The generated access functions are:
+        ///     The generated access functions are:
         ///     @li @b field_retain() - for FlagsMembers::Retain member field.
         ///     @li @b field_qos() - for FlagsMembers::Qos member field.
         ///     @li @b field_dup() - for FlagsMembers::Dup member field.
