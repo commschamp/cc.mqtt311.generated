@@ -126,7 +126,7 @@ struct FrameLayers
             ///     related to @b comms::field::Bitfield class from COMMS library
             ///     for details.
             ///
-            ///      The generated access functions are:
+            ///     The generated access functions are:
             ///     @li @b field_flags() - for IdAndFlagsFieldMembers::Flags member field.
             ///     @li @b field_id() - for IdAndFlagsFieldMembers::Id member field.
             COMMS_FIELD_MEMBERS_ACCESS(
