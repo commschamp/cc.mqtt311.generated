@@ -48,56 +48,47 @@ auto dispatchClientInputMessage(
     case mqtt311::MsgId_Connack:
     {
         using MsgType = mqtt311::message::Connack<InterfaceType, TProtOptions>;
-        auto& castedMsg = static_cast<MsgType&>(msg);
-        return handler.handle(castedMsg);
+        return handler.handle(static_cast<MsgType&>(msg));
     }
     case mqtt311::MsgId_Publish:
     {
         using MsgType = mqtt311::message::Publish<InterfaceType, TProtOptions>;
-        auto& castedMsg = static_cast<MsgType&>(msg);
-        return handler.handle(castedMsg);
+        return handler.handle(static_cast<MsgType&>(msg));
     }
     case mqtt311::MsgId_Puback:
     {
         using MsgType = mqtt311::message::Puback<InterfaceType, TProtOptions>;
-        auto& castedMsg = static_cast<MsgType&>(msg);
-        return handler.handle(castedMsg);
+        return handler.handle(static_cast<MsgType&>(msg));
     }
     case mqtt311::MsgId_Pubrec:
     {
         using MsgType = mqtt311::message::Pubrec<InterfaceType, TProtOptions>;
-        auto& castedMsg = static_cast<MsgType&>(msg);
-        return handler.handle(castedMsg);
+        return handler.handle(static_cast<MsgType&>(msg));
     }
     case mqtt311::MsgId_Pubrel:
     {
         using MsgType = mqtt311::message::Pubrel<InterfaceType, TProtOptions>;
-        auto& castedMsg = static_cast<MsgType&>(msg);
-        return handler.handle(castedMsg);
+        return handler.handle(static_cast<MsgType&>(msg));
     }
     case mqtt311::MsgId_Pubcomp:
     {
         using MsgType = mqtt311::message::Pubcomp<InterfaceType, TProtOptions>;
-        auto& castedMsg = static_cast<MsgType&>(msg);
-        return handler.handle(castedMsg);
+        return handler.handle(static_cast<MsgType&>(msg));
     }
     case mqtt311::MsgId_Suback:
     {
         using MsgType = mqtt311::message::Suback<InterfaceType, TProtOptions>;
-        auto& castedMsg = static_cast<MsgType&>(msg);
-        return handler.handle(castedMsg);
+        return handler.handle(static_cast<MsgType&>(msg));
     }
     case mqtt311::MsgId_Unsuback:
     {
         using MsgType = mqtt311::message::Unsuback<InterfaceType, TProtOptions>;
-        auto& castedMsg = static_cast<MsgType&>(msg);
-        return handler.handle(castedMsg);
+        return handler.handle(static_cast<MsgType&>(msg));
     }
     case mqtt311::MsgId_Pingresp:
     {
         using MsgType = mqtt311::message::Pingresp<InterfaceType, TProtOptions>;
-        auto& castedMsg = static_cast<MsgType&>(msg);
-        return handler.handle(castedMsg);
+        return handler.handle(static_cast<MsgType&>(msg));
     }
     default:
         break;
