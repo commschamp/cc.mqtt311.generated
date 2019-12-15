@@ -102,16 +102,19 @@ class Publish : public
         >;
 
 public:
-    /// @brief Allow access to internal fields.
-    /// @details See definition of @b COMMS_MSG_FIELDS_ACCESS macro
+    /// @brief Provide names and allow access to internal fields.
+    /// @details See definition of @b COMMS_MSG_FIELDS_NAMES macro
     ///     related to @b comms::MessageBase class from COMMS library
     ///     for details.
     ///
-    ///     The generated functions are:
-    ///     @li @b field_topic() for @ref PublishFields::Topic field.
-    ///     @li @b field_packetId() for @ref PublishFields::PacketId field.
-    ///     @li @b field_payload() for @ref PublishFields::Payload field.
-    COMMS_MSG_FIELDS_ACCESS(
+    ///     The generated types and functions are:
+    ///     @li @b Field_topic type and @b field_topic() fuction
+    ///         for @ref PublishFields::Topic field.
+    ///     @li @b Field_packetId type and @b field_packetId() fuction
+    ///         for @ref PublishFields::PacketId field.
+    ///     @li @b Field_payload type and @b field_payload() fuction
+    ///         for @ref PublishFields::Payload field.
+    COMMS_MSG_FIELDS_NAMES(
         topic,
         packetId,
         payload

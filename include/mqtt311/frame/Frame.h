@@ -122,14 +122,16 @@ struct FrameLayers
                 >;
         public:
             /// @brief Allow access to internal fields.
-            /// @details See definition of @b COMMS_FIELD_MEMBERS_ACCESS macro
+            /// @details See definition of @b COMMS_FIELD_MEMBERS_NAMES macro
             ///     related to @b comms::field::Bitfield class from COMMS library
             ///     for details.
             ///
             ///     The generated access functions are:
-            ///     @li @b field_flags() - for IdAndFlagsFieldMembers::Flags member field.
-            ///     @li @b field_id() - for IdAndFlagsFieldMembers::Id member field.
-            COMMS_FIELD_MEMBERS_ACCESS(
+            ///     @li @b Field_flags @b field_flags() -
+            ///         for IdAndFlagsFieldMembers::Flags member field.
+            ///     @li @b Field_id @b field_id() -
+            ///         for IdAndFlagsFieldMembers::Id member field.
+            COMMS_FIELD_MEMBERS_NAMES(
                 flags,
                 id
             );

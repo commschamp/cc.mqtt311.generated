@@ -150,15 +150,18 @@ struct MessageFields
             >;
     public:
         /// @brief Allow access to internal fields.
-        /// @details See definition of @b COMMS_FIELD_MEMBERS_ACCESS macro
+        /// @details See definition of @b COMMS_FIELD_MEMBERS_NAMES macro
         ///     related to @b comms::field::Bitfield class from COMMS library
         ///     for details.
         ///
         ///     The generated access functions are:
-        ///     @li @b field_retain() - for FlagsMembers::Retain member field.
-        ///     @li @b field_qos() - for FlagsMembers::Qos member field.
-        ///     @li @b field_dup() - for FlagsMembers::Dup member field.
-        COMMS_FIELD_MEMBERS_ACCESS(
+        ///     @li @b Field_retain @b field_retain() -
+        ///         for FlagsMembers::Retain member field.
+        ///     @li @b Field_qos @b field_qos() -
+        ///         for FlagsMembers::Qos member field.
+        ///     @li @b Field_dup @b field_dup() -
+        ///         for FlagsMembers::Dup member field.
+        COMMS_FIELD_MEMBERS_NAMES(
             retain,
             qos,
             dup
@@ -199,13 +202,14 @@ class Message : public
         >;
 public:
     /// @brief Allow access to extra transport fields.
-    /// @details See definition of @b COMMS_MSG_TRANSPORT_FIELDS_ACCESS macro
+    /// @details See definition of @b COMMS_MSG_TRANSPORT_FIELDS_NAMES macro
     ///     related to @b comms::Message class from COMMS library
     ///     for details.
     ///
     ///     The generated functions are:
-    ///     @li @b transportField_flags() for @ref MessageFields::Flags field.
-    COMMS_MSG_TRANSPORT_FIELDS_ACCESS(
+    ///     @li @b TransportField_flags type and @b transportField_flags() function for
+    ///         @ref MessageFields::Flags field.
+    COMMS_MSG_TRANSPORT_FIELDS_NAMES(
         flags
     );
 
