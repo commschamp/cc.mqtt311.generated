@@ -257,15 +257,18 @@ struct ConnectFields
             >;
     public:
         /// @brief Allow access to internal fields.
-        /// @details See definition of @b COMMS_FIELD_MEMBERS_ACCESS macro
+        /// @details See definition of @b COMMS_FIELD_MEMBERS_NAMES macro
         ///     related to @b comms::field::Bitfield class from COMMS library
         ///     for details.
         ///
         ///     The generated access functions are:
-        ///     @li @b field_low() - for FlagsMembers::Low member field.
-        ///     @li @b field_willQos() - for FlagsMembers::WillQos member field.
-        ///     @li @b field_high() - for FlagsMembers::High member field.
-        COMMS_FIELD_MEMBERS_ACCESS(
+        ///     @li @b Field_low @b field_low() -
+        ///         for FlagsMembers::Low member field.
+        ///     @li @b Field_willQos @b field_willQos() -
+        ///         for FlagsMembers::WillQos member field.
+        ///     @li @b Field_high @b field_high() -
+        ///         for FlagsMembers::High member field.
+        COMMS_FIELD_MEMBERS_NAMES(
             low,
             willQos,
             high
@@ -489,22 +492,31 @@ class Connect : public
         >;
 
 public:
-    /// @brief Allow access to internal fields.
-    /// @details See definition of @b COMMS_MSG_FIELDS_ACCESS macro
+    /// @brief Provide names and allow access to internal fields.
+    /// @details See definition of @b COMMS_MSG_FIELDS_NAMES macro
     ///     related to @b comms::MessageBase class from COMMS library
     ///     for details.
     ///
-    ///     The generated functions are:
-    ///     @li @b field_protocolName() for @ref ConnectFields::ProtocolName field.
-    ///     @li @b field_protocolLevel() for @ref ConnectFields::ProtocolLevel field.
-    ///     @li @b field_flags() for @ref ConnectFields::Flags field.
-    ///     @li @b field_keepAlive() for @ref ConnectFields::KeepAlive field.
-    ///     @li @b field_clientId() for @ref ConnectFields::ClientId field.
-    ///     @li @b field_willTopic() for @ref ConnectFields::WillTopic field.
-    ///     @li @b field_willMessage() for @ref ConnectFields::WillMessage field.
-    ///     @li @b field_userName() for @ref ConnectFields::UserName field.
-    ///     @li @b field_password() for @ref ConnectFields::Password field.
-    COMMS_MSG_FIELDS_ACCESS(
+    ///     The generated types and functions are:
+    ///     @li @b Field_protocolName type and @b field_protocolName() fuction
+    ///         for @ref ConnectFields::ProtocolName field.
+    ///     @li @b Field_protocolLevel type and @b field_protocolLevel() fuction
+    ///         for @ref ConnectFields::ProtocolLevel field.
+    ///     @li @b Field_flags type and @b field_flags() fuction
+    ///         for @ref ConnectFields::Flags field.
+    ///     @li @b Field_keepAlive type and @b field_keepAlive() fuction
+    ///         for @ref ConnectFields::KeepAlive field.
+    ///     @li @b Field_clientId type and @b field_clientId() fuction
+    ///         for @ref ConnectFields::ClientId field.
+    ///     @li @b Field_willTopic type and @b field_willTopic() fuction
+    ///         for @ref ConnectFields::WillTopic field.
+    ///     @li @b Field_willMessage type and @b field_willMessage() fuction
+    ///         for @ref ConnectFields::WillMessage field.
+    ///     @li @b Field_userName type and @b field_userName() fuction
+    ///         for @ref ConnectFields::UserName field.
+    ///     @li @b Field_password type and @b field_password() fuction
+    ///         for @ref ConnectFields::Password field.
+    COMMS_MSG_FIELDS_NAMES(
         protocolName,
         protocolLevel,
         flags,

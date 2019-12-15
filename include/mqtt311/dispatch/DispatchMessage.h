@@ -143,7 +143,7 @@ auto dispatchMessage(
     if (idx != 0U) {
         return handler.handle(msg);
     }
-    return dispatchMessage(id, msg, handler);
+    return dispatchMessage<TProtOptions>(id, msg, handler);
 }
 
 /// @brief Dispatch message object to its appropriate handling function.
@@ -181,6 +181,73 @@ auto dispatchMessageDefaultOptions(
 {
     return dispatchMessage<mqtt311::options::DefaultOptions>(id, idx, msg, handler);
 }
+
+/// @brief Message dispatcher class to be used with
+///     @b comms::processAllWithDispatchViaDispatcher() function (or similar).
+/// @tparam TProtOptions Protocol options struct used for the application,
+///     like @ref mqtt311::options::DefaultOptions.
+/// @headerfile "mqtt311/dispatch/DispatchMessage.h"
+template <typename TProtOptions>
+struct MsgDispatcher
+{
+    /// @brief Class detection tag
+    using MsgDispatcherTag = void;
+
+    /// @brief Dispatch message to its handler.
+    /// @details Uses appropriate @ref dispatchMessage() function.
+    /// @param[in] id ID of the message.
+    /// @param[in] idx Index (or offset) of the message among those having the same numeric ID.
+    /// @param[in] msg Reference to message object.
+    /// @param[in] handler Reference to handler object.
+    /// @return What the @ref dispatchMessage() function returns.
+    template <typename TMsg, typename THandler>
+    static auto dispatch(mqtt311::MsgId id, std::size_t idx, TMsg& msg, THandler& handler) ->
+        decltype(mqtt311::dispatch::dispatchMessage<TProtOptions>(id, idx, msg, handler))
+    {
+        return mqtt311::dispatch::dispatchMessage<TProtOptions>(id, idx, msg, handler);
+    }
+
+    /// @brief Complementary dispatch function.
+    /// @details Same as other dispatch without @b TAllMessages template parameter,
+    ///     used by  @b comms::processAllWithDispatchViaDispatcher().
+    template <typename TAllMessages, typename TMsg, typename THandler>
+    static auto dispatch(mqtt311::MsgId id, std::size_t idx, TMsg& msg, THandler& handler) ->
+        decltype(dispatch(id, idx, msg, handler))
+    {
+        return dispatch(id, idx, msg, handler);
+    }
+
+    /// @brief Dispatch message to its handler.
+    /// @details Uses appropriate @ref dispatchMessage() function.
+    /// @param[in] id ID of the message.
+    /// @param[in] msg Reference to message object.
+    /// @param[in] handler Reference to handler object.
+    /// @return What the @ref dispatchMessage() function returns.
+    template <typename TMsg, typename THandler>
+    static auto dispatch(mqtt311::MsgId id, TMsg& msg, THandler& handler) ->
+        decltype(mqtt311::dispatch::dispatchMessage<TProtOptions>(id, msg, handler))
+    {
+        return mqtt311::dispatch::dispatchMessage<TProtOptions>(id, msg, handler);
+    }
+
+    /// @brief Complementary dispatch function.
+    /// @details Same as other dispatch without @b TAllMessages template parameter,
+    ///     used by  @b comms::processAllWithDispatchViaDispatcher().
+    template <typename TAllMessages, typename TMsg, typename THandler>
+    static auto dispatch(mqtt311::MsgId id, TMsg& msg, THandler& handler) ->
+        decltype(dispatch(id, msg, handler))
+    {
+        return dispatch(id, msg, handler);
+    }
+};
+
+/// @brief Message dispatcher class to be used with
+///     @b comms::processAllWithDispatchViaDispatcher() function (or similar).
+/// @details Same as @ref MsgDispatcher, but passing
+///     @ref mqtt311::options::DefaultOptions as template parameter.
+/// @note Defined in "mqtt311/dispatch/DispatchMessage.h"
+using MsgDispatcherDefaultOptions =
+    MsgDispatcher<mqtt311::options::DefaultOptions>;
 
 } // namespace dispatch
 
