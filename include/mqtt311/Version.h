@@ -14,10 +14,10 @@
 #define MQTT311_MAJOR_VERSION (0U)
 
 /// @brief Minor version of the protocol library.
-#define MQTT311_MINOR_VERSION (18U)
+#define MQTT311_MINOR_VERSION (19U)
 
 /// @brief Patch version of the protocol library.
-#define MQTT311_PATCH_VERSION (2U)
+#define MQTT311_PATCH_VERSION (0U)
 
 /// @brief Full version of the protocol library as single number.
 #define MQTT311_VERSION (COMMS_MAKE_VERSION(MQTT311_MAJOR_VERSION, MQTT311_MINOR_VERSION, MQTT311_PATCH_VERSION))
