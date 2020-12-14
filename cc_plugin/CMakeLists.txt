@@ -34,6 +34,12 @@ function (cc_plugin_all_messages)
     add_library (${name} STATIC ${src})
     target_link_libraries (${name} PUBLIC mqtt311 cc::comms cc::comms_champion Qt5::Widgets Qt5::Core)
     target_include_directories (${name} PUBLIC ${PROJECT_SOURCE_DIR})
+    target_compile_options(${name} PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/bigobj /wd4127 /wd5054>
+        $<$<CXX_COMPILER_ID:GNU>:-ftemplate-depth=2048>
+        $<$<CXX_COMPILER_ID:Clang>:-ftemplate-depth=2048>
+    )
+
     if (CC_COMMS_CHAMPION_FOUND)
         if (CC_PLUGIN_DIR)
             file (RELATIVE_PATH rel_plugin_install_path "${CC_ROOT_DIR}" "${CC_PLUGIN_DIR}")
@@ -86,7 +92,7 @@ function (cc_plugin protocol has_config_widget)
     add_library (${name} MODULE ${src} ${moc})
     target_link_libraries (${name} ${ALL_MESSAGES_LIB} cc::comms_champion Qt5::Widgets Qt5::Core ${extra_link_opts})
     target_compile_options(${name} PRIVATE
-        $<$<CXX_COMPILER_ID:MSVC>:/bigobj>
+        $<$<CXX_COMPILER_ID:MSVC>:/bigobj /wd4127 /wd5054>
         $<$<CXX_COMPILER_ID:GNU>:-ftemplate-depth=2048>
         $<$<CXX_COMPILER_ID:Clang>:-ftemplate-depth=2048>
     )
