@@ -2,7 +2,7 @@
 /// @tableofcontents
 /// This generated code implements "mqtt311" binary protocol using various
 /// classes from
-/// <a href="https://github.com/commschamp/comms_champion#comms-library">COMMS Library</a>.@n
+/// <a href="https://github.com/commschamp/comms">COMMS Library</a>.@n
 /// Below is a short summary of generated classes.
 /// Please refer to <b>"How to Use Defined Custom Protocol"</b> page of its documentation
 /// for detailed explanation on how to use them.
@@ -15,16 +15,16 @@
 ///
 /// @section main_messages Available Message Classes
 /// The following namespaces contain all the classes describing available messages:
-/// @li @ref mqtt311::message (residing in @b mqtt311/message directory).
+/// @li @ref mqtt311::message (defined in @b mqtt311/message  directory)
 ///
 /// @section main_fields Available Common Fields
 /// The following namespaces contain all definition of all the fields,
 /// which can be references by multiple messages:
-/// @li @ref mqtt311::field (residing in @b mqtt311/field directory).
+/// @li @ref mqtt311::field (defined in @b mqtt311/field  directory)
 ///
 /// @section main_interfaces Common Interface Classes
 /// The available common interface classes are:
-/// @li @ref mqtt311::Message from @b mqtt311/Message.h header file).
+/// @li @ref mqtt311::Message (defined in @b mqtt311/Message.h header file).
 ///
 /// @section main_frames Frame (Protocol Stack) Classes
 /// The available frame (protocol stack) classes are:
@@ -55,17 +55,17 @@
 /// based.
 ///
 /// The available functions are:
-/// @li @ref mqtt311::dispatch::dispatchMessage
+/// @li @ref mqtt311::dispatch::dispatchMessage()
 /// (defined in @b mqtt311/dispatch/DispatchMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchMessageDefaultOptions
+/// @li @ref mqtt311::dispatch::dispatchMessageDefaultOptions()
 /// (defined in @b mqtt311/dispatch/DispatchMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchServerInputMessage
+/// @li @ref mqtt311::dispatch::dispatchServerInputMessage()
 /// (defined in @b mqtt311/dispatch/DispatchServerInputMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchServerInputMessageDefaultOptions
+/// @li @ref mqtt311::dispatch::dispatchServerInputMessageDefaultOptions()
 /// (defined in @b mqtt311/dispatch/DispatchServerInputMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchClientInputMessage
+/// @li @ref mqtt311::dispatch::dispatchClientInputMessage()
 /// (defined in @b mqtt311/dispatch/DispatchClientInputMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchClientInputMessageDefaultOptions
+/// @li @ref mqtt311::dispatch::dispatchClientInputMessageDefaultOptions()
 /// (defined in @b mqtt311/dispatch/DispatchClientInputMessage.h header file).
 ///
 /// There are also some dispatcher objects to be used with
