@@ -26,10 +26,10 @@ namespace dispatch
 ///     to handle and one for the interface class as well.
 ///     @code
 ///     using MyInterface = mqtt311::Message<...>;
-///     using MyConnack = mqtt311::message::Connack<MyInterface, mqtt311::options::DefaultOptions>;
+///     using MyConnect = mqtt311::message::Connect<MyInterface, mqtt311::options::DefaultOptions>;
 ///     using MyPublish = mqtt311::message::Publish<MyInterface, mqtt311::options::DefaultOptions>;
 ///     struct MyHandler {
-///         void handle(MyConnack& msg) {...}
+///         void handle(MyConnect& msg) {...}
 ///         void handle(MyPublish& msg) {...}
 ///         ...
 ///         // Handle all unexpected or irrelevant messages.
@@ -47,9 +47,9 @@ auto dispatchServerInputMessage(
 {
     using InterfaceType = typename std::decay<decltype(msg)>::type;
     switch(id) {
-    case mqtt311::MsgId_Connack:
+    case mqtt311::MsgId_Connect:
     {
-        using MsgType = mqtt311::message::Connack<InterfaceType, TProtOptions>;
+        using MsgType = mqtt311::message::Connect<InterfaceType, TProtOptions>;
         return handler.handle(static_cast<MsgType&>(msg));
     }
     case mqtt311::MsgId_Publish:
@@ -77,19 +77,24 @@ auto dispatchServerInputMessage(
         using MsgType = mqtt311::message::Pubcomp<InterfaceType, TProtOptions>;
         return handler.handle(static_cast<MsgType&>(msg));
     }
-    case mqtt311::MsgId_Suback:
+    case mqtt311::MsgId_Subscribe:
     {
-        using MsgType = mqtt311::message::Suback<InterfaceType, TProtOptions>;
+        using MsgType = mqtt311::message::Subscribe<InterfaceType, TProtOptions>;
         return handler.handle(static_cast<MsgType&>(msg));
     }
-    case mqtt311::MsgId_Unsuback:
+    case mqtt311::MsgId_Unsubscribe:
     {
-        using MsgType = mqtt311::message::Unsuback<InterfaceType, TProtOptions>;
+        using MsgType = mqtt311::message::Unsubscribe<InterfaceType, TProtOptions>;
         return handler.handle(static_cast<MsgType&>(msg));
     }
-    case mqtt311::MsgId_Pingresp:
+    case mqtt311::MsgId_Pingreq:
     {
-        using MsgType = mqtt311::message::Pingresp<InterfaceType, TProtOptions>;
+        using MsgType = mqtt311::message::Pingreq<InterfaceType, TProtOptions>;
+        return handler.handle(static_cast<MsgType&>(msg));
+    }
+    case mqtt311::MsgId_Disconnect:
+    {
+        using MsgType = mqtt311::message::Disconnect<InterfaceType, TProtOptions>;
         return handler.handle(static_cast<MsgType&>(msg));
     }
     default:
