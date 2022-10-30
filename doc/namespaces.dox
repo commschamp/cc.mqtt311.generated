@@ -1,29 +1,29 @@
-/// @namespace mqtt311
+/// @namespace cc_mqtt311
 /// @brief Protocol specific namespace.
 
-/// @namespace mqtt311::message
-/// @brief Namespace for all the messages in mqtt311 namespace.
+/// @namespace cc_mqtt311::message
+/// @brief Namespace for all the messages in cc_mqtt311 namespace.
 
-/// @namespace mqtt311::field
-/// @brief Namespace for all the stand alone fields defined in mqtt311 namespace.
+/// @namespace cc_mqtt311::field
+/// @brief Namespace for all the stand alone fields defined in cc_mqtt311 namespace.
 
-/// @namespace mqtt311::frame
-/// @brief Namespace for all the frames defined in mqtt311 namespace.
+/// @namespace cc_mqtt311::frame
+/// @brief Namespace for all the frames defined in cc_mqtt311 namespace.
 
-/// @namespace mqtt311::frame::layer
-/// @brief Namespace for the custom frame layers defined in mqtt311 namespace.
+/// @namespace cc_mqtt311::frame::layer
+/// @brief Namespace for the custom frame layers defined in cc_mqtt311 namespace.
 
-/// @namespace mqtt311::frame::checksum
-/// @brief Namespace for the custom frame layers defined in mqtt311 namespace.
+/// @namespace cc_mqtt311::frame::checksum
+/// @brief Namespace for the custom frame layers defined in cc_mqtt311 namespace.
 
 
-/// @namespace mqtt311::options
+/// @namespace cc_mqtt311::options
 /// @brief Main namespace for the various protocol options.
 
-/// @namespace mqtt311::input
+/// @namespace cc_mqtt311::input
 /// @brief Main namespace for hold input messages bundles.
 
-/// @namespace mqtt311::dispatch
+/// @namespace cc_mqtt311::dispatch
 /// @brief Main namespace for the various message dispatch functions.
 
 

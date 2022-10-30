@@ -1,6 +1,6 @@
-/// @mainpage "mqtt311" Binary Protocol Library
+/// @mainpage "cc_mqtt311" Binary Protocol Library
 /// @tableofcontents
-/// This generated code implements "mqtt311" binary protocol using various
+/// This generated code implements "cc_mqtt311" binary protocol using various
 /// classes from
 /// <a href="https://github.com/commschamp/comms">COMMS Library</a>.@n
 /// Below is a short summary of generated classes.
@@ -15,36 +15,36 @@
 ///
 /// @section main_messages Available Message Classes
 /// The following namespaces contain all the classes describing available messages:
-/// @li @ref mqtt311::message (defined in @b mqtt311/message  directory)
+/// @li @ref cc_mqtt311::message (defined in @b cc_mqtt311/message  directory)
 ///
 /// @section main_fields Available Common Fields
 /// The following namespaces contain all definition of all the fields,
 /// which can be references by multiple messages:
-/// @li @ref mqtt311::field (defined in @b mqtt311/field  directory)
+/// @li @ref cc_mqtt311::field (defined in @b cc_mqtt311/field  directory)
 ///
 /// @section main_interfaces Common Interface Classes
 /// The available common interface classes are:
-/// @li @ref mqtt311::Message (defined in @b mqtt311/Message.h header file).
+/// @li @ref cc_mqtt311::Message (defined in @b cc_mqtt311/Message.h header file).
 ///
 /// @section main_frames Frame (Protocol Stack) Classes
 /// The available frame (protocol stack) classes are:
-/// @li @ref mqtt311::frame::Frame (from @b mqtt311/frame/Frame.h header file).
+/// @li @ref cc_mqtt311::frame::Frame (from @b cc_mqtt311/frame/Frame.h header file).
 ///
 /// Every frame class/type definition receives (as a template parameter) a list of
 /// @b input message types it is expected to recognize. Default defintion
-/// uses @ref mqtt311::input::AllMessages (defined in @b mqtt311/input/AllMessages.h).
+/// uses @ref cc_mqtt311::input::AllMessages (defined in @b cc_mqtt311/input/AllMessages.h).
 /// @n If protocol defines any uni-directional message, then it is recommended to use
-/// either @ref mqtt311::input::ServerInputMessages (from @b mqtt311/input/ServerInputMessages.h)
-/// or @ref mqtt311::input::ClientInputMessages  (from @b mqtt311/input/ClientInputMessages.h)
+/// either @ref cc_mqtt311::input::ServerInputMessages (from @b cc_mqtt311/input/ServerInputMessages.h)
+/// or @ref cc_mqtt311::input::ClientInputMessages  (from @b cc_mqtt311/input/ClientInputMessages.h)
 /// @b NOTE, that the frame definition does not exactly follow the recommended
 /// instructions from <b>Protocol Stack Definition Tutorial</b> page of @b COMMS
 /// library documentation. The extra customization (see @ref main_customization below)
 /// is performed by passing options to the layers themselves.
 ///
 /// The available bundles of input messages are:
-/// @li @ref mqtt311::input::AllMessages (from @b mqtt311/input/AllMessages.h header file).
-/// @li @ref mqtt311::input::ServerInputMessages (from @b mqtt311/input/ServerInputMessages.h header file).
-/// @li @ref mqtt311::input::ClientInputMessages (from @b mqtt311/input/ClientInputMessages.h header file).
+/// @li @ref cc_mqtt311::input::AllMessages (from @b cc_mqtt311/input/AllMessages.h header file).
+/// @li @ref cc_mqtt311::input::ServerInputMessages (from @b cc_mqtt311/input/ServerInputMessages.h header file).
+/// @li @ref cc_mqtt311::input::ClientInputMessages (from @b cc_mqtt311/input/ClientInputMessages.h header file).
 ///
 /// @section main_dispatch Dispatching Message Objects
 /// While the @b COMMS library provides various built-in ways of 
@@ -55,55 +55,55 @@
 /// based.
 ///
 /// The available functions are:
-/// @li @ref mqtt311::dispatch::dispatchMessage()
-/// (defined in @b mqtt311/dispatch/DispatchMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchMessageDefaultOptions()
-/// (defined in @b mqtt311/dispatch/DispatchMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchServerInputMessage()
-/// (defined in @b mqtt311/dispatch/DispatchServerInputMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchServerInputMessageDefaultOptions()
-/// (defined in @b mqtt311/dispatch/DispatchServerInputMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchClientInputMessage()
-/// (defined in @b mqtt311/dispatch/DispatchClientInputMessage.h header file).
-/// @li @ref mqtt311::dispatch::dispatchClientInputMessageDefaultOptions()
-/// (defined in @b mqtt311/dispatch/DispatchClientInputMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::dispatchMessage()
+/// (defined in @b cc_mqtt311/dispatch/DispatchMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::dispatchMessageDefaultOptions()
+/// (defined in @b cc_mqtt311/dispatch/DispatchMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::dispatchServerInputMessage()
+/// (defined in @b cc_mqtt311/dispatch/DispatchServerInputMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::dispatchServerInputMessageDefaultOptions()
+/// (defined in @b cc_mqtt311/dispatch/DispatchServerInputMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::dispatchClientInputMessage()
+/// (defined in @b cc_mqtt311/dispatch/DispatchClientInputMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::dispatchClientInputMessageDefaultOptions()
+/// (defined in @b cc_mqtt311/dispatch/DispatchClientInputMessage.h header file).
 ///
 /// There are also some dispatcher objects to be used with
 /// @b comms::processAllWithDispatchViaDispatcher() function or similar.
-/// @li @ref mqtt311::dispatch::MsgDispatcher
-/// (defined in @b mqtt311/dispatch/DispatchMessage.h header file).
-/// @li @ref mqtt311::dispatch::MsgDispatcherDefaultOptions
-/// (defined in @b mqtt311/dispatch/DispatchMessage.h header file).
-/// @li @ref mqtt311::dispatch::ServerInputMsgDispatcher
-/// (defined in @b mqtt311/dispatch/DispatchServerInputMessage.h header file).
-/// @li @ref mqtt311::dispatch::ServerInputMsgDispatcherDefaultOptions
-/// (defined in @b mqtt311/dispatch/DispatchServerInputMessage.h header file).
-/// @li @ref mqtt311::dispatch::ClientInputMsgDispatcher
-/// (defined in @b mqtt311/dispatch/DispatchClientInputMessage.h header file).
-/// @li @ref mqtt311::dispatch::ClientInputMsgDispatcherDefaultOptions
-/// (defined in @b mqtt311/dispatch/DispatchClientInputMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::MsgDispatcher
+/// (defined in @b cc_mqtt311/dispatch/DispatchMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::MsgDispatcherDefaultOptions
+/// (defined in @b cc_mqtt311/dispatch/DispatchMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::ServerInputMsgDispatcher
+/// (defined in @b cc_mqtt311/dispatch/DispatchServerInputMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::ServerInputMsgDispatcherDefaultOptions
+/// (defined in @b cc_mqtt311/dispatch/DispatchServerInputMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::ClientInputMsgDispatcher
+/// (defined in @b cc_mqtt311/dispatch/DispatchClientInputMessage.h header file).
+/// @li @ref cc_mqtt311::dispatch::ClientInputMsgDispatcherDefaultOptions
+/// (defined in @b cc_mqtt311/dispatch/DispatchClientInputMessage.h header file).
 ///
 /// @section main_customization Customization
 /// Depending on the value of @b customization option passed to the @b commsdsl2comms
-/// code generator, the latter generates @ref mqtt311::options::DefaultOptions
-/// struct (defined in @b mqtt311/options/DefaultOptions.h file),
+/// code generator, the latter generates @ref cc_mqtt311::options::DefaultOptions
+/// struct (defined in @b cc_mqtt311/options/DefaultOptions.h file),
 /// which is used by default throughout the protocol definition classes.
 /// The struct contains all the available type definition, which can be used to
 /// customize default data structures and/or behaviour of various classes.
 /// If any additional customization is required, just recreate similar struct with
 /// relevant types overriden with new definition. The easiest way is to extend
-/// the mqtt311::options::DefaultOptions. For example:
+/// the cc_mqtt311::options::DefaultOptions. For example:
 /// @code
-/// struct MyOptions : public mqtt311::options::DefaultOptions
+/// struct MyOptions : public cc_mqtt311::options::DefaultOptions
 /// {
-///     struct field : public mqtt311::options::DefaultOptions::field
+///     struct field : public cc_mqtt311::options::DefaultOptions::field
 ///     {
 ///         // use comms::util::StaticString as storage type
 ///         using SomeStringField = comms::option::app::FixedSizeStorage<32>;
 ///     };
 /// };
 /// @endcode
-/// @b NOTE, that inner scope of structs in the mqtt311::options::DefaultOptions
+/// @b NOTE, that inner scope of structs in the cc_mqtt311::options::DefaultOptions
 /// resembles scope of namespaces used in protocol definition.
 ///
 /// The @b COMMS library also provides a flexible way to configure polymorphic
@@ -113,13 +113,13 @@
 /// other for output:
 /// @code
 /// using MyInputMsg =
-///    mqtt311::Message<
+///    cc_mqtt311::Message<
 ///        comms::option::app::ReadIterator<const std::uint8_t*>, // for polymorphic read
 ///        comms::option::app::Handler<MyHandler> // for polymorphic dispatch
 ///    >;
 ///
 /// using MyOutputMsg =
-///    mqtt311::Message<
+///    cc_mqtt311::Message<
 ///        comms::option::app::WriteIterator<std::uint8_t*>, // for polymorphic write
 ///        comms::option::app::LengthInfoInterface, // for polymorphic serialization length retrieval
 ///        comms::option::app::IdInfoInterface // for polymorphic message ID retrieval
@@ -129,7 +129,7 @@
 /// single interface class:
 /// @code
 /// using MyMsg =
-///    mqtt311::Message<
+///    cc_mqtt311::Message<
 ///        comms::option::app::ReadIterator<const std::uint8_t*>, // for polymorphic read
 ///        comms::option::app::Handler<MyHandler> // for polymorphic dispatch
 ///        comms::option::app::WriteIterator<std::uint8_t*>, // for polymorphic write
@@ -137,15 +137,15 @@
 ///        comms::option::app::IdInfoInterface // for polymorphic message ID retrieval
 ///    >;
 /// @endcode
-/// In this case the code generator may also define @b mqtt311::options::ServerDefaultOptions
-/// (defined in @b mqtt311/options/ServerDefaultOptions.h file) and
-/// @b mqtt311::options::ClientDefaultOptions (defined in @b mqtt311/options/ClientDefaultOptions.h file).
+/// In this case the code generator may also define @b cc_mqtt311::options::ServerDefaultOptions
+/// (defined in @b cc_mqtt311/options/ServerDefaultOptions.h file) and
+/// @b cc_mqtt311::options::ClientDefaultOptions (defined in @b cc_mqtt311/options/ClientDefaultOptions.h file).
 /// These structs suppress generation of unnecessary virtual functions which are not
 /// going to be used. Consider using this structs as options instead of default
-/// mqtt311::options::DefaultOptions.
+/// cc_mqtt311::options::DefaultOptions.
 ///
-/// Also there is @ref mqtt311::options::BareMetalDefaultOptions
-/// (defined in @b mqtt311/options/BareMetalDefaultOptions.h file) which can help in defining
+/// Also there is @ref cc_mqtt311::options::BareMetalDefaultOptions
+/// (defined in @b cc_mqtt311/options/BareMetalDefaultOptions.h file) which can help in defining
 /// options for bare-metal applications. It exclude all usage of dynamic memory allocation.
 ///
 /// In case non-custom &lt;id&gt; layer has been used in schema (files), custom,
@@ -158,22 +158,22 @@
 /// never outlive the input buffer. In such scenarios it could be a waste of memory / CPU cycles to
 /// copy bytes from the input buffer to internal storage of the fields like &lt;string&gt;
 /// (@b comms::field::String) and/or &lt;data&gt; (@b comms::field::ArrayList of raw bytes).
-/// The generated code also provides mqtt311::options::DataViewDefaultOptions (defined in
-/// @b mqtt311/options/DataViewDefaultOptions.h file) where relevant fields apply @b comms::option::app::OrigDataView
+/// The generated code also provides cc_mqtt311::options::DataViewDefaultOptions (defined in
+/// @b cc_mqtt311/options/DataViewDefaultOptions.h file) where relevant fields apply @b comms::option::app::OrigDataView
 /// option.
 ///
 /// Also note that the specified extension options are implemented as the following template classes
 /// which receive other options as their base class and apply relevant changes on top.
-/// @li @ref mqtt311::options::ClientDefaultOptionsT
-/// @li @ref mqtt311::options::ServerDefaultOptionsT
-/// @li @ref mqtt311::options::BareMetalDefaultOptionsT
-/// @li @ref mqtt311::options::DataViewDefaultOptionsT
+/// @li @ref cc_mqtt311::options::ClientDefaultOptionsT
+/// @li @ref cc_mqtt311::options::ServerDefaultOptionsT
+/// @li @ref cc_mqtt311::options::BareMetalDefaultOptionsT
+/// @li @ref cc_mqtt311::options::DataViewDefaultOptionsT
 ///
 /// As the result it is possible to combine them. For example:
 /// @code
 /// using MyOptions=
-///     mqtt311::options::DataViewDefaultOptionsT<
-///         mqtt311::options::ClientDefaultOptions
+///     cc_mqtt311::options::DataViewDefaultOptionsT<
+///         cc_mqtt311::options::ClientDefaultOptions
 ///     >;
 /// @endcode
 
