@@ -66,6 +66,11 @@ class Pubrel : public
         >;
 
 public:
+    Pubrel()
+    {
+        Base::transportField_flags().field_qos().value() = static_cast<typename Base::TransportField_flags::Field_qos::ValueType>(1);
+    }
+
     /// @brief Provide names and allow access to internal fields.
     /// @details See definition of @b COMMS_MSG_FIELDS_NAMES macro
     ///     related to @b comms::MessageBase class from COMMS library

@@ -201,7 +201,7 @@ public:
     /// @brief Updated validity check
     bool doValid() const
     {
-        if (doValidOrig()) {
+        if (!doValidOrig()) {
             return false;
         }
 
