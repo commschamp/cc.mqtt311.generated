@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <type_traits>
 #include "cc_mqtt311/field/BinDataCommon.h"
+#include "cc_mqtt311/field/ProtocolNameCommon.h"
 #include "cc_mqtt311/field/QosCommon.h"
 #include "cc_mqtt311/field/StringCommon.h"
 
@@ -25,14 +26,7 @@ struct ConnectFieldsCommon
 {
     /// @brief Common types and functions for
     ///     @ref cc_mqtt311::message::ConnectFields::ProtocolName field.
-    struct ProtocolNameCommon
-    {
-        /// @brief Name of the @ref cc_mqtt311::message::ConnectFields::ProtocolName field.
-        static const char* name()
-        {
-            return "Protocol Name";
-        }
-    };
+    using ProtocolNameCommon = cc_mqtt311::field::ProtocolNameCommon;
 
     /// @brief Common types and functions for
     ///     @ref cc_mqtt311::message::ConnectFields::ProtocolLevel field.

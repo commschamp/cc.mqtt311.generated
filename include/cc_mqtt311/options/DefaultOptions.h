@@ -28,6 +28,10 @@ struct DefaultOptionsT : public TBase
         using BinData = comms::option::app::EmptyOption;
 
         /// @brief Extra options for @ref
+        ///     cc_mqtt311::field::ProtocolName field.
+        using ProtocolName = comms::option::app::EmptyOption;
+
+        /// @brief Extra options for @ref
         ///     cc_mqtt311::field::String field.
         using String = comms::option::app::EmptyOption;
 
