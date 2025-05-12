@@ -26,16 +26,16 @@
 /// The available common interface classes are:
 /// @li @ref cc_mqtt311::Message (defined in @b cc_mqtt311/Message.h header file).
 ///
-/// @section main_frames Frame (Protocol Stack) Classes
-/// The available frame (protocol stack) classes are:
+/// @section main_frames Frame Classes
+/// The available frame classes are:
 /// @li @ref cc_mqtt311::frame::Frame (from @b cc_mqtt311/frame/Frame.h header file).
 ///
 /// Every frame class/type definition receives (as a template parameter) a list of
 /// @b input message types it is expected to recognize. Default defintion
-/// uses @ref cc_mqtt311::input::AllMessages (defined in @b cc_mqtt311/input/AllMessages.h).
+/// uses @b All messages bundle (for example @ref cc_mqtt311::input::AllMessages defined in @b cc_mqtt311/input/AllMessages.h).
 /// @n If protocol defines any uni-directional message, then it is recommended to use
-/// either @ref cc_mqtt311::input::ServerInputMessages (from @b cc_mqtt311/input/ServerInputMessages.h)
-/// or @ref cc_mqtt311::input::ClientInputMessages  (from @b cc_mqtt311/input/ClientInputMessages.h)
+/// either @b Server messages bundle (for example @ref cc_mqtt311::input::ServerInputMessages from @b cc_mqtt311/input/ServerInputMessages.h)
+/// or @b Client messages bundle (for example @ref cc_mqtt311::input::ClientInputMessages from @b cc_mqtt311/input/ClientInputMessages.h)
 /// @b NOTE, that the frame definition does not exactly follow the recommended
 /// instructions from <b>Protocol Stack Definition Tutorial</b> page of @b COMMS
 /// library documentation. The extra customization (see @ref main_customization below)
