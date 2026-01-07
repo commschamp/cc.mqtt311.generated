@@ -177,4 +177,3 @@
 ///         cc_mqtt311::options::ClientDefaultOptions
 ///     >;
 /// @endcode
-
